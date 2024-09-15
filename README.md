@@ -18,5 +18,5 @@
 
 ### Предварительные требования
 
-- [Node.js](https://nodejs.org/) (версии 14 и выше)
+- [Node.js](https://nodejs.org/) (версии 20 и выше)
 - [npm](https://www.npmjs.com/) (в комплекте с Node.js)
