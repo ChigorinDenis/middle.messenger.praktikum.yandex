@@ -2,8 +2,9 @@
 import autoprefixer from 'autoprefixer';
 
 export default {
+  // parser: 'postcss-scss',
   plugins : [
     // postcssPresetEnv(),
     autoprefixer(),
   ]
-}
+};
