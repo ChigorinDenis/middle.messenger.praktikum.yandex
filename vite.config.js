@@ -17,5 +17,5 @@ export default defineConfig({
 
   },
   assetsInclude: ['**/*.hbs'],
-  publicDir: 'static'
+  publicDir: 'static',
 });

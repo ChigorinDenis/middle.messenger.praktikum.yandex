@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "vite build && node server.cjs",
     "preview": "vite preview",
     "lint": "npx eslint src/"
   },
@@ -14,7 +15,6 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
-    "handlebars": "^4.7.8",
     "postcss": "^8.4.45",
     "postcss-preset-env": "^10.0.2",
     "postcss-scss": "^4.0.9",
@@ -22,5 +22,9 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-handlebars": "^2.0.0",
     "vite-plugin-raw": "^1.0.3"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "handlebars": "^4.7.8"
   }
 }
