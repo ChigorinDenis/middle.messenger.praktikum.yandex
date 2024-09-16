@@ -80,6 +80,9 @@ input, button {
   all: unset; 
   box-sizing: border-box;
 }
+ul {
+  list-style-type: none;
+}
 
 .container-input-group {
   display: flex;
@@ -435,10 +438,12 @@ input, button {
   }
 }
 
-.container-links {
+.nav-container ul{
   display: flex;
   gap: 20px;
+  
 }
-.temp-links {
+
+.nav-links {
   color: white;
 }
