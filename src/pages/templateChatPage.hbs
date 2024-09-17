@@ -1,0 +1,16 @@
+<div class="main-page">
+  <div class="left">
+    {{#if profile}}
+      {{> sidePanelProfileInfo}}
+    {{else if edit}}
+      {{> sidePanelEditProfile}}
+    {{else if password}}
+      {{> sidePanelEditPassword}}
+    {{else}}
+      {{> sidePanelChatList}}
+    {{/if}}
+  </div>
+  <div class="right">
+    {{> messageList}}
+  </div>
+</div>
