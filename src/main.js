@@ -63,10 +63,11 @@ app.innerHTML = template();
 links.innerHTML = tempLink();
 
 
-const container = document.querySelector('.container-links');
+const container = document.querySelector('.nav-container');
 
 container.addEventListener('click', (event) => {
-  if (event.target.classList.contains('temp-links')) {
+  console.log('started');
+  if (event.target.classList.contains('nav-links')) {
     event.preventDefault();
     const templateName = event.target.getAttribute('data-template');
     switchTemplate(templateName);
