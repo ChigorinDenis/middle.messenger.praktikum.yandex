@@ -1,5 +1,7 @@
-function abs(str: string):string {
-  return `${str} привет!`;
-}
+import './style.scss';
+import App from './App';
 
-console.log(abs('Тайпскрипт'));    ;
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new App();
+  app.render();
+});
