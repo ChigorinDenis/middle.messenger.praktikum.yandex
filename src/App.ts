@@ -1,4 +1,23 @@
 import Input from "./components/Input/Input";
+import InputGroup from "./components/InputGroup/InputGroup";
+import Form from "./layouts/Form/Form";
+
+const inputGroupSettings: InputGroupSettings[] = [
+  {
+    title: 'Hello1',
+    type: 'text',
+    name: 'somename1',
+    placeholder: 'text',
+    onBlur: (e) => { console.log('onBlur is worked 1111')}
+  },
+  {
+    title: 'Hello2',
+    type: 'text',
+    name: 'somename2',
+    placeholder: 'text',
+    onBlur: (e) => { console.log('onBlur is worked 222')}
+  }
+]
 
 export default class App {
 
@@ -9,13 +28,11 @@ export default class App {
   }
 
   render(): string {
-    const input = new Input({
-      type: 'text',
-      name: 'somename',
-      value: 'text',
-      onBlur: (e) => { console.log('onBlur is worked')}
+    const form = new Form({
+      title: 'Вход',
+      inputGroupSettings,
     });
-    this.appElement.replaceWith(input.getContent());
+    this.appElement.replaceWith(form.getContent());
     return '';
   }
 }

@@ -13,6 +13,8 @@
   "include": [
     "src/**/*.ts",
     "types/**/*.d.ts",
+    "src/**/*.d.ts",
+    "global.d.ts",
     "eslint.config.js"
   ]
 }

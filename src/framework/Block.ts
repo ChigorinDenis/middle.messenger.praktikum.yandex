@@ -92,6 +92,7 @@ export default class Block {
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
+        console.log('children', children);
       } else if (Array.isArray(value)) {
         lists[key] = value;
       } else {
@@ -99,7 +100,7 @@ export default class Block {
         props[key] = value;
       }
     });
-
+    
     return { children, props, lists };
   }
 

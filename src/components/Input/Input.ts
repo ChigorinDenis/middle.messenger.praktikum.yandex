@@ -2,17 +2,14 @@ import Block from "../../framework/Block";
 import Handlebars from "handlebars";
 import templateInput from './templateInput.hbs';
 
-type InputSettings = {
-  type: string,
-  name: string,
-  value: string | number;
-  onBlur?: (e:Event) => void;
-}
 
 export default class Input extends Block {
   constructor(props: InputSettings) {
     super({
       ...props,
+      attr: {
+        'class': 'input-small bgd-dark'
+      },
       events: {
         blur: (e :Event) => props.onBlur && props.onBlur(e)
       }

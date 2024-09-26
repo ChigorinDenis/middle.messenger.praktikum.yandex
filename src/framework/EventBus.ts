@@ -1,7 +1,7 @@
 export type EventCallback = (...args: any[]) => void;
 
 class EventBus {
-  private listeners: Record<string, EventCallback[]> = {};
+  private listeners: Record<string, EventCallback[]>;
 
   constructor() {
     this.listeners = {};
@@ -12,7 +12,6 @@ class EventBus {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
-    console.log(this.listeners)
     this.listeners[event].push(callback);
   }
 
