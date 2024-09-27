@@ -9,10 +9,20 @@ type InputSettings = {
 
 type InputGroupSettings = InputSettings & {
   title: string,
-  type: string,
-  name: string,
-  placeholder?: string,
-  value?: string | number;
-  onBlur?: (e:Event) => void;
-  onChange?: (e:Event) => void;
+}
+
+
+interface FormField {
+  value: string | number;     
+  validationRules: ValidationRule[];  
+  error: string | null;     
+}
+
+interface ValidationRule {
+  validate: (value: string | number) => boolean;
+  message: string;
+}
+
+interface FormState {
+  [key: string]: FormField;
 }

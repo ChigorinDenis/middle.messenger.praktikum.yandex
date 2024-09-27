@@ -37,12 +37,14 @@ export default class Block {
   }
 
   private _addEvents(): void {
-    const { events = {}} = this.props;
-    Object.keys(events).forEach(eventName => {
-      if (this._element) {
-        this._element.addEventListener(eventName, events[eventName]);
-      }
-    });
+    const { events } = this.props;
+    if (events) {
+      Object.keys(events).forEach(eventName => {
+        if (this._element) {
+          this._element.addEventListener(eventName, events[eventName]);
+        }
+      })
+    };
   }
 
   private _registerEvents(eventBus: EventBus): void {
@@ -92,7 +94,6 @@ export default class Block {
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
-        console.log('children', children);
       } else if (Array.isArray(value)) {
         lists[key] = value;
       } else {

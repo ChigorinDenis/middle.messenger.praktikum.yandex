@@ -11,7 +11,8 @@ export default class Input extends Block {
         'class': 'input-small bgd-dark'
       },
       events: {
-        blur: (e :Event) => props.onBlur && props.onBlur(e)
+        blur: (e :Event) => props.onBlur && props.onBlur(e),
+        change: (e :Event) => props.onChange && props.onChange(e)
       }
     })
     this.props = props;
