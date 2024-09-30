@@ -1,6 +1,7 @@
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
 
+
 interface BlockProps {
   [key: string]: any;
 }
@@ -74,7 +75,7 @@ export default class Block {
     if (!response) {
       return;
     }
-    this._render();
+    this._render(); 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -82,6 +83,11 @@ export default class Block {
     return true;
   }
 
+  public dispatchComponentDidUpdate(): void {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+  }
+
+ 
   private _getChildrenPropsAndProps(propsAndChildren: BlockProps): {
     children: Record<string, Block>,
     props: BlockProps,
@@ -97,7 +103,7 @@ export default class Block {
       } else if (Array.isArray(value)) {
         lists[key] = value;
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+         
         props[key] = value;
       }
     });
@@ -119,7 +125,6 @@ export default class Block {
     if (!nextProps) {
       return;
     }
-
     Object.assign(this.props, nextProps);
   };
 
@@ -128,7 +133,6 @@ export default class Block {
   }
 
   private _render(): void {
-    console.log('Render');
     const propsAndStubs = { ...this.props };
     const _tmpId =  Math.floor(100000 + Math.random() * 900000);
     Object.entries(this.children).forEach(([key, child]) => {
@@ -195,7 +199,9 @@ export default class Block {
       },
       set(target: BlockProps, prop: string, value: any) {
         const oldTarget = { ...target };
+        
         target[prop] = value;
+        console.log('oldtarget and target', oldTarget, target);
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },

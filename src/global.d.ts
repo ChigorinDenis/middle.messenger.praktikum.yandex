@@ -9,8 +9,11 @@ type InputSettings = {
 
 type InputGroupSettings = InputSettings & {
   title: string,
+  error: string | null;
 }
-
+type ButtonSettings = {
+  title: string,
+}
 
 interface FormField {
   value: string | number;     

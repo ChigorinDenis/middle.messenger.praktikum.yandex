@@ -10,6 +10,19 @@ const onChange = (state:FormState) => (e: Event): void => {
   console.log(state);
 }
 
+const onBlur = (state:FormState) => (e: Event): void => {
+  const target = e.target as HTMLInputElement;
+  const { name, value } = target;
+  if (name in state) {
+    const { validationRules } = state[name];
+    const invalidedRule = validationRules.find((rule) => (!rule.validate(value)));
+    if (invalidedRule) {
+      state[name].error = invalidedRule.message;
+      console.log('InputError', state[name].error);
+    }
+  }
+}
+
 const formState: FormState = {
   email: {
     value: 'ddd',
@@ -43,9 +56,11 @@ const inputGroupSettings: InputGroupSettings[] = [
     type: 'text',
     name: 'email',
     placeholder: 'Введите email',
-    onBlur: (e) => { console.log('onBlur is worked 1111')},
+    onBlur: onBlur(formState),
     onChange: onChange(formState),
-    value: formState.email.value
+    value: formState.email.value,
+    error: formState.email.error
+    
   },
   {
     title: 'Пароль',
@@ -54,7 +69,8 @@ const inputGroupSettings: InputGroupSettings[] = [
     placeholder: 'Введите пароль',
     onBlur: (e) => { console.log('onBlur is worked 222')},
     onChange: onChange(formState),
-    value: formState.password.value
+    value: formState.password.value,
+    error: formState.password.error
   }
 ];
 
@@ -67,6 +83,13 @@ export default class LoginPage {
       title: 'Вход',
       inputGroupSettings,
     });
+    setTimeout(() => {
+      form.setProps({
+      state: formState,
+      title: 'Login',
+      inputGroupSettings,
+      });
+    }, 5000)
     return form.getContent();
 
   }

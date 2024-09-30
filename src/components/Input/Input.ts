@@ -8,7 +8,7 @@ export default class Input extends Block {
     super({
       ...props,
       attr: {
-        'class': 'input-small bgd-dark'
+        'class': 'input-small bgd-light'
       },
       events: {
         blur: (e :Event) => props.onBlur && props.onBlur(e),

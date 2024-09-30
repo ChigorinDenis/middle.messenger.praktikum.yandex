@@ -1,14 +1,7 @@
 import Form from '../layouts/Form/Form';
+import InputGroup from '../components/InputGroup/InputGroup';
+import  { uppercaseFirstLetter } from '../utils/utils'
 
-
-const onChange = (state:FormState) => (e: Event): void => {
-  const target = e.target as HTMLInputElement;
-  const { name, value } = target;
-  if (name in state) {
-    state[name].value = value;
-  }
-  console.log(state);
-}
 
 const formState: FormState = {
   email: {
@@ -93,75 +86,88 @@ const inputGroupSettings: InputGroupSettings[] = [
     type: 'text',
     name: 'email',
     placeholder: 'Введите email',
-    onBlur: (e) => { console.log('onBlur is worked 1111')},
-    onChange: onChange(formState),
-    value: formState.email.value
+    onBlur: () => { console.log('email blur'); },
+    onChange: () => {},
+    value: formState.email.value,
+    error: formState.email.error
   },
   {
     title: 'Логин',
     type: 'text',
     name: 'login',
     placeholder: 'Введите логин',
-    onBlur: (e) => { console.log('onBlur is worked 1111')},
-    onChange: onChange(formState),
-    value: formState.login.value
+    onBlur: () => {},
+    onChange: () => {},
+    value: formState.login.value,
+    error: formState.login.error
   },
   {
     title: 'Имя',
     type: 'text',
     name: 'first_name',
     placeholder: 'Введите имя',
-    onBlur: (e) => { console.log('onBlur is worked 1111')},
-    onChange: onChange(formState),
-    value: formState.first_name.value
+    onBlur: () => {},
+    onChange: () => {},
+    value: formState.first_name.value,
+    error: formState.first_name.error
   },
   {
     title: 'Фамилия',
     type: 'text',
     name: 'second_name',
     placeholder: 'Введите фамилию',
-    onBlur: (e) => { console.log('onBlur is worked 1111')},
-    onChange: onChange(formState),
-    value: formState.second_name.value
+    onBlur: () => {},
+    onChange: () => {},
+    value: formState.second_name.value,
+    error: formState.second_name.error
   },
   {
     title: 'Телефон',
     type: 'tel',
     name: 'phone',
     placeholder: 'Введите телефон',
-    onBlur: (e) => { console.log('onBlur is worked 1111')},
-    onChange: onChange(formState),
-    value: formState.email.value
+    onBlur: () => {},
+    onChange: () => {},
+    value: formState.phone.value,
+    error: formState.phone.error,
   },
   {
     title: 'Пароль',
     type: 'password',
     name: 'password',
     placeholder: 'Введите пароль',
-    onBlur: (e) => { console.log('onBlur is worked 222')},
-    onChange: onChange(formState),
-    value: formState.password.value
+    onBlur: () => {},
+    onChange: () => {},
+    value: formState.password.value,
+    error: formState.password.error
   },
   {
     title: 'Повторите пароль',
     type: 'password',
     name: 'password_check',
     placeholder: 'Введите пароль',
-    onBlur: (e) => { console.log('onBlur is worked 222')},
-    onChange: onChange(formState),
-    value: formState.password_check.value
+    onBlur: () => {},
+    onChange: () => {},
+    value: formState.password_check.value,
+    error: formState.password_check.error
   }
 ];
-
 
 
 export default class SignupPage {
   getContent(): HTMLElement | null {
     const form = new Form({
-      state: formState,
+      state: formState,                     
       title: 'Регистрация',
       inputGroupSettings,
     });
+    // setTimeout(() => {
+    //   form.setProps({
+    //   state: formState,
+    //   title: 'Registarion',
+    //   inputGroupSettings,
+    //   });
+    // }, 5000)
     return form.getContent();
 
   }
