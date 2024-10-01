@@ -3,6 +3,11 @@ import InputGroup from "./components/InputGroup/InputGroup";
 import Form from "./layouts/Form/Form";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ChatsList from './layouts/ChatsList/ChatsList'
+import MessageBox from "./layouts/MessageBox/MessageBox";
+import SidePanel from "./layouts/SidePanel/SidePanel";
+
+import PageChat from "./pages/PageChat";
 
 export default class App {
 

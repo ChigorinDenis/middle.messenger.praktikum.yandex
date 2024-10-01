@@ -16,19 +16,15 @@ export default class InputGroup extends Block {
       ...props,
       InputChild
     })
-    this.props = props;
   }
 
   public render(): string {
-    if (this.props.name === 'email') {
-      console.log("InputError", this.props.error);
-    }
     return `<div class="input-group">
-      <label for={{name}}>{{title}}</label>
-      {{{InputChild}}}
-      {{#if error}}
-        <span class="input-group-error">{{error}}</span>
-      {{/if}}  
-    </div>`
+              <label for={{name}}>{{title}}</label>
+              {{{InputChild}}}
+              {{#if error}}
+                <span class="input-group-error">{{error}}</span>
+              {{/if}}  
+            </div>`
   }
 }

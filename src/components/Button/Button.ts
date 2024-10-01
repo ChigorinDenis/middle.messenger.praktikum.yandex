@@ -8,7 +8,6 @@ export default class Button extends Block {
         'class': 'btn'
       },
     })
-    this.props = props;
   }
 
   public render(): string {

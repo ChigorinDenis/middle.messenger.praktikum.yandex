@@ -15,7 +15,6 @@ export default class Input extends Block {
         change: (e :Event) => props.onChange && props.onChange(e)
       }
     })
-    this.props = props;
   }
 
   public render(): string {

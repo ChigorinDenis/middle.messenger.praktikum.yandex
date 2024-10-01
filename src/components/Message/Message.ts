@@ -1,15 +1,15 @@
 import Block from "../../framework/Block";
 
 export default class Message extends Block {
-  constructor(props: InputSettings) {
+  constructor(props: MessageSettings) {
     super({
       ...props,
     });
-    this.props = props;
   }
 
   public render(): string {
-    return `<div class="message message-other">
+    const messageClass = this.props.type === 'sender' ? 'message-user' : 'message-other';
+    return `<div class="message ${messageClass}">
               <p>
                 {{text}}
               </p>

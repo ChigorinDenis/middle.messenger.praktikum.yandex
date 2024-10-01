@@ -1,11 +1,10 @@
 import Block from "../../framework/Block";
 
 export default class ChatItem extends Block {
-  constructor(props: InputSettings) {
+  constructor(props: ChatItemSettings) {
     super({
       ...props,
     });
-    this.props = props;
   }
 
   public render(): string {
@@ -16,15 +15,17 @@ export default class ChatItem extends Block {
               <div class="chat-info">
                 <div class="chat-header">
                   <div>
-                    <span class="chat-name">Иван Иванов</span>
-                    <div class="chat-last-message">Привет! Как дела?</div>
+                    <span class="chat-name">{{name}}</span>
+                    <div class="chat-last-message">{{lastMessage}}</div>
                   </div>
-                  <span class="chat-time">11:45</span>
+                  <span class="chat-time">{{lastMessageTime}}</span>
                 </div>
               </div>
-              <div class="chat-unread">
-                <span class="unread-count">2</span>
-              </div>
+              {{#if newMessagesCount}}
+                <div class="chat-unread">
+                  <span class="unread-count">{{newMessagesCount}}</span>
+                </div>
+              {{/if}}
             </div>`;
   }
 }

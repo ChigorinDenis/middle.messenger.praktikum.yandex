@@ -201,7 +201,6 @@ export default class Block {
         const oldTarget = { ...target };
         
         target[prop] = value;
-        console.log('oldtarget and target', oldTarget, target);
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },

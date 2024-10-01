@@ -8,7 +8,6 @@ export default class ButtonLink extends Block {
         'class': 'btn-link'
       },
     })
-    this.props = props;
   }
 
   public render(): string {

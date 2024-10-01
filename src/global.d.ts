@@ -1,3 +1,12 @@
+interface ValidationRule {
+  validate: (value: string) => boolean;
+  message: string;
+}
+
+interface ValidationRules {
+  [field: string]: ValidationRule[];
+}
+
 type InputSettings = {
   type: string,
   name: string,
@@ -21,11 +30,22 @@ interface FormField {
   error: string | null;     
 }
 
-interface ValidationRule {
-  validate: (value: string | number) => boolean;
-  message: string;
-}
 
 interface FormState {
   [key: string]: FormField;
+}
+
+
+type ChatItemSettings = {
+  name: string,
+  lastMessageTime: string
+  lastMessage: string,
+  newMessagesCount: number
+}
+
+
+type MessageSettings = {
+  type: string,
+  text: string,
+  time: string
 }

@@ -1,11 +1,8 @@
 import Block from "../../framework/Block";
 
 export default class MessageInput extends Block {
-  constructor(props: InputSettings) {
-    super({
-      ...props,
-    });
-    this.props = props;
+  constructor() {
+    super();
   }
 
   public render(): string {

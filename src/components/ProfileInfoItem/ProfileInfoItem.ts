@@ -5,7 +5,6 @@ export default class ProfileInfoItem extends Block {
     super({
       ...props,
     });
-    this.props = props;
   }
 
   public render(): string {
