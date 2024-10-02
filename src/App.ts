@@ -7,7 +7,7 @@ import ChatsList from './layouts/ChatsList/ChatsList'
 import MessageBox from "./layouts/MessageBox/MessageBox";
 import SidePanel from "./layouts/SidePanel/SidePanel";
 
-import PageChat from "./pages/PageChat";
+import ChatPage from "./pages/ChatPage";
 
 export default class App {
 
@@ -19,7 +19,8 @@ export default class App {
 
   render(): string {
     // const loginPage = new LoginPage();
-    const signupPage = new SignupPage();
+    const signupPage = new ChatPage();
+    // const signupPage = new SignupPage();
     this.appElement.replaceWith(signupPage.getContent());
     return '';
   }

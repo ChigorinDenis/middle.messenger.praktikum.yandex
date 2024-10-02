@@ -5,8 +5,11 @@ export default class Button extends Block {
     super({
       ...props,
       attr: {
-        'class': 'btn'
+        'class': props.btnStyle || 'btn'
       },
+      events: {
+        click: props.onClick
+      }
     })
   }
 

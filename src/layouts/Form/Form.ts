@@ -5,8 +5,12 @@ import ButtonLink from '../../components/ButtonLink/ButtonLink';
 
 type FormSettings = {
   title: string,
+  btnSubmitTitle?: string,
+  btnLinkTitle?: string,
   inputGroupList: InputGroupSettings[],
   validate: (name:string, value: string | number) => string | null;
+  bgdForm?: string,
+  btnStyle?: string,
 }
 
 
@@ -17,7 +21,7 @@ export default class Form extends Block {
     const onChange = (e: Event): void => {
       const target = e.target as HTMLInputElement;
       const { name, value } = target;
-     
+      console.log(name, value);
     }
     
     const onBlur = (e: Event): void => {
@@ -26,16 +30,33 @@ export default class Form extends Block {
       const index = props.inputGroupList.findIndex((prop) => prop.name === name);
       if (index != -1) {
         const error = props.validate(name, value);
-        console.log('error',error);
         this.lists.inputGroupList[index].setProps({ error });
       }
-      console.log('props-lists', props.inputGroupList)
-        // this.setProps({...props, title: 'Аннигиляция'});
-        // this.lists.inputGroupList[0].setProps({title: 'Кака', error: 'бяка'}) 
-        // this.children['TempInput'].setProps({error: 'говняка'});
-        // this.children['Button'].setProps({title: 'говняка'});
-     
     }
+
+    const onSubmit = (e:Event):void => {
+      e.preventDefault();
+      const form = this.getContent() as HTMLFormElement;
+        const formData = new FormData(form);
+    
+        let isFormDataValid = true;
+        props.inputGroupList.forEach(({ name }) => {
+          const value = formData.get(name) as string || '';
+          const index = props.inputGroupList.findIndex((prop) => prop.name === name);
+          if (index != -1) {
+            const error = props.validate(name, value);
+            this.lists.inputGroupList[index].setProps({ error });
+            if (error) {
+              isFormDataValid = false;
+            }
+          }
+        });
+        if (!isFormDataValid) {
+          console.log('Form  data is not valid')
+          return;
+        }
+        console.log('formData', Object.fromEntries(formData));
+      }
 
 
     const inputGroupList: Block[] = props.inputGroupList
@@ -50,28 +71,33 @@ export default class Form extends Block {
       ...props,
       inputGroupList,
       Button: new Button({
-        title: 'Войти',
+        title: props.btnSubmitTitle,
+        onClick: onSubmit,
+        btnStyle: props.btnStyle,
       }),
       ButtonLink: new ButtonLink({
-        title: 'Нет аккаунта?',
+        title: props.btnLinkTitle,
       }),
+      attr: {
+        'class': props.bgdForm,
+      }
     })
   }
 
   public render(): string {
-    console.log('form', this);
-    return `<div class="container-form">
-              <form class="bgd-dark">
-                <h1 class="form-title">{{title}}</h1>
-                <div class="container-input-group">
-                    {{{inputGroupList}}}
-                    {{{TempInput}}}
-                  <div class="btn-group">
-                    {{{Button}}}
-                    {{{ButtonLink}}}
-                  </div>
-                </div>
-              </form>
-            </div>`;
+    return `
+        <form>
+          <h1 class="form-title">{{title}}</h1>
+          <div class="container-input-group">
+              {{{inputGroupList}}}
+              {{{TempInput}}}
+            <div class="btn-group">
+              {{{Button}}}
+              {{{ButtonLink}}}
+            </div>
+          </div>
+        </form>
+        </div>
+    `;
   }
 }

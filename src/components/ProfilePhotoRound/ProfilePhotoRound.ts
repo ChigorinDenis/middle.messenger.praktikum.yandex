@@ -1,11 +1,9 @@
 import Block from "../../framework/Block";
 
 export default class ProfilePhotoRound extends Block {
-  constructor(props: InputSettings) {
+  constructor() {
     super({
-      ...props,
     });
-    this.props = props;
   }
 
   public render(): string {

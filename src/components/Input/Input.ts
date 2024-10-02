@@ -8,11 +8,13 @@ export default class Input extends Block {
     super({
       ...props,
       attr: {
-        'class': 'input-small bgd-light'
+        'class': props.inputClass || 'input-small bgd-light',
+        placeholder: props.placeholder
       },
       events: {
         blur: (e :Event) => props.onBlur && props.onBlur(e),
-        change: (e :Event) => props.onChange && props.onChange(e)
+        change: (e :Event) => props.onChange && props.onChange(e),
+        keyup: (e :Event) => props.onEnter && props.onEnter(e)
       }
     })
   }

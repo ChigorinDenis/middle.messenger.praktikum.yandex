@@ -1,12 +1,14 @@
-import Form from '../layouts/Form/Form';
-import Block from '../framework/Block';
-import getValidationFunc from '../validation/validation';
-import validationRules from '../validation/validationRules';
+import Block from '../../framework/Block';
+import ProfilePhotoRound from '../../components/ProfilePhotoRound/ProfilePhotoRound';
+import Form from '../../layouts/Form/Form';
+import getValidationFunc from '../../validation/validation';
+import validationRules from '../../validation/validationRules';
 
+const validate = getValidationFunc(validationRules);
 
 const inputGroupList: InputGroupSettings[] = [
   {
-    title: 'Email',
+    title: 'Почта',
     type: 'text',
     name: 'email',
     placeholder: 'Введите email',
@@ -55,48 +57,33 @@ const inputGroupList: InputGroupSettings[] = [
     value: '',
     error: null
   },
-  {
-    title: 'Пароль',
-    type: 'password',
-    name: 'password',
-    placeholder: 'Введите пароль',
-    onBlur: () => {},
-    onChange: () => {},
-    value: '',
-    error: null
-  },
-  {
-    title: 'Повторите пароль',
-    type: 'password',
-    name: 'password_check',
-    placeholder: 'Введите пароль',
-    onBlur: () => {},
-    onChange: () => {},
-    value: '',
-    error: null
-  }
 ];
 
-const validate = getValidationFunc(validationRules);
-
-export default class SignupPage extends Block{
+export default class EditPassword extends Block {
   constructor() {
     super({
-      Form: new Form({                   
-        title: 'Регистрация',
-        btnSubmitTitle: 'Зарегистрироваться',
-        btnLinkTitle: 'Войти',
+      ProfilePhotoRound: new ProfilePhotoRound(),
+      Form: new Form({
+        title: '',
+        btnSubmitTitle: 'Сохранить',
         inputGroupList,
         validate,
-        bgdForm: 'bgd-dark',
+        bgdForm: 'edit-profile',
+        btnStyle: 'btn-2',
       })
-    })
+    });
+   
   }
-  public render(): string  {
+
+  public render(): string {  
     return `
-          <div class="container-form">
-            {{{Form}}}
-          </div>
-        `;
+      <div class="side-panel">
+        <div class="side-panel-header">
+          <img src="/icons/arrow_back.svg" alt="back">
+        </div>  
+        {{{ProfilePhotoRound}}}
+        {{{Form}}}
+      </div>
+    `
   }
 }

@@ -138,10 +138,6 @@ ul {
             inset 0 -5px 5px 0px rgba($primary-color, 0.25);
 }
 
-// .input-large {
-//   padding: 15px;
-//   color: #63DAFC;
-// }
 
 .btn {
   @include btn-style($padding-large, linear-gradient(to right, $accent-color1, $accent-color2), $border-radius-small);

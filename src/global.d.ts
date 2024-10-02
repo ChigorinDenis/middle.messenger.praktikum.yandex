@@ -14,6 +14,8 @@ type InputSettings = {
   value?: string | number;
   onBlur?: (e:Event) => void;
   onChange?: (e:Event) => void;
+  onEnter?: (e:Event) => void;
+  inputClass?: string,
 }
 
 type InputGroupSettings = InputSettings & {
@@ -22,6 +24,9 @@ type InputGroupSettings = InputSettings & {
 }
 type ButtonSettings = {
   title: string,
+  type?: string,
+  btnStyle?: string,
+  onClick?: (e:Event) => void;
 }
 
 interface FormField {

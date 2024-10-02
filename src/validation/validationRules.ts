@@ -65,6 +65,34 @@ const validationRules = {
       message: 'Пароль должен содержать хотя бы одну цифру.',
     }
   ],
+  oldPassword: [
+    {
+      validate: (value: string) => value.length >= 8 && value.length <= 40,
+      message: 'Пароль должен быть длиной от 8 до 40 символов.',
+    },
+    {
+      validate: (value: string) => /[A-Z]/.test(value),
+      message: 'Пароль должен содержать хотя бы одну заглавную букву.',
+    },
+    {
+      validate: (value: string) => /\d/.test(value),
+      message: 'Пароль должен содержать хотя бы одну цифру.',
+    }
+  ],
+  newPassword: [
+    {
+      validate: (value: string) => value.length >= 8 && value.length <= 40,
+      message: 'Пароль должен быть длиной от 8 до 40 символов.',
+    },
+    {
+      validate: (value: string) => /[A-Z]/.test(value),
+      message: 'Пароль должен содержать хотя бы одну заглавную букву.',
+    },
+    {
+      validate: (value: string) => /\d/.test(value),
+      message: 'Пароль должен содержать хотя бы одну цифру.',
+    }
+  ],
   phone: [
     {
       validate: (value: string) => /^[+]?[\d]{10,15}$/.test(value),
