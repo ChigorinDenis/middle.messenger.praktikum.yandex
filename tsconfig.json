@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
-    "sourceMap": true,
+
   
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
@@ -11,6 +11,15 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src/**/*.ts",
