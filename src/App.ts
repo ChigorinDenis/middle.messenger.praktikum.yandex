@@ -1,3 +1,4 @@
+import Block from "./framework/Block";
 import Links from "./layouts/Links/Links";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -7,6 +8,14 @@ import EditPasswordPage from './pages/EditPasswordPage';
 import EditProfilePage from './pages/EditProfilePage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from "./pages/ChatPage";
+
+
+interface PageClass {
+  new (): Block
+}
+type  MappingPage = {
+  [key: string]: PageClass
+}
 
 export default class App {
 
@@ -19,7 +28,7 @@ export default class App {
   }
 
   render(): string {
-    const mappingPage = {
+    const mappingPage:MappingPage = {
       main: ChatPage,
       login: LoginPage,
       signup: SignupPage,
