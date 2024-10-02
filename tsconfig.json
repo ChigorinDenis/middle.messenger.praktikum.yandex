@@ -6,9 +6,6 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "paths": {
-      "*": ["src/*"]  // Ensure this resolves to the correct source directory
-    }
   },
   "include": [
     "src/**/*.ts",
