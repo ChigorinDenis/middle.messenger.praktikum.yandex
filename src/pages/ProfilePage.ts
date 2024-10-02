@@ -1,14 +1,13 @@
 import Block from '../framework/Block';
-import SidePanel from '../layouts/SidePanel/SidePanel';
+import ProfileInfo from '../layouts/ProfileInfo/ProfileInfo';
 import MessageBox from '../layouts/MessageBox/MessageBox';
 
 
-
-export default class PageChat extends Block {
+export default class ProfilePage extends Block {
   constructor() {
     super({
-      SidePanel: new SidePanel(),
       MessageBox: new MessageBox(),
+      ProfileInfo: new ProfileInfo(),
     });
   }
   
@@ -16,8 +15,8 @@ export default class PageChat extends Block {
   public render(): string {
     return `
     <div class="main-page">
-      <div class="left">
-        {{{SidePanel}}}
+      <div class="left"> 
+        {{{ProfileInfo}}}  
       </div>
       <div class="right">
         {{{MessageBox}}}

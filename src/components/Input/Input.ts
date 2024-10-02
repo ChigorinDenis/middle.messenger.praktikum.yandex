@@ -1,7 +1,4 @@
 import Block from "../../framework/Block";
-import Handlebars from "handlebars";
-import templateInput from './templateInput.hbs';
-
 
 export default class Input extends Block {
   constructor(props: InputSettings) {
@@ -20,7 +17,14 @@ export default class Input extends Block {
   }
 
   public render(): string {
-    const inputEl = Handlebars.compile(templateInput)(this.props);
-    return inputEl;
+    return `
+          <input
+            type={{type}}
+            name={{name}}
+            {{#if value}}
+            value={{value}}
+            {{/if}}
+          />
+    `;
   }
 }

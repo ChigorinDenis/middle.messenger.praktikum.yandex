@@ -1,14 +1,13 @@
 import Block from '../framework/Block';
-import SidePanel from '../layouts/SidePanel/SidePanel';
+import EditPassword from '../layouts/EditPassword/EditPassword';
 import MessageBox from '../layouts/MessageBox/MessageBox';
 
 
-
-export default class PageChat extends Block {
+export default class EditPasswordPage extends Block {
   constructor() {
     super({
-      SidePanel: new SidePanel(),
       MessageBox: new MessageBox(),
+      EditPassword: new EditPassword(),
     });
   }
   
@@ -17,7 +16,7 @@ export default class PageChat extends Block {
     return `
     <div class="main-page">
       <div class="left">
-        {{{SidePanel}}}
+        {{{EditPassword}}}
       </div>
       <div class="right">
         {{{MessageBox}}}
