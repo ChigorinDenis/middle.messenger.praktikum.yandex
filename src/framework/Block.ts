@@ -1,6 +1,6 @@
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface BlockProps {
   [key: string]: any;

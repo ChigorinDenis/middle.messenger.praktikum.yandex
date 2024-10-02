@@ -16,7 +16,7 @@
     "build": "vite build",
     "start": "vite build && node server.cjs",
     "preview": "vite preview",
-    "lint": "npx eslint .",
+    "lint": "npx eslint src",
     "lint:styles": "stylelint '**/*.{css,scss}' --fix"
   },
   "devDependencies": {
