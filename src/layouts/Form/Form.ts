@@ -71,12 +71,12 @@ export default class Form extends Block {
       ...props,
       inputGroupList,
       Button: new Button({
-        title: props.btnSubmitTitle,
+        title: props.btnSubmitTitle || '',
         onClick: onSubmit,
         btnStyle: props.btnStyle,
       }),
       ButtonLink: new ButtonLink({
-        title: props.btnLinkTitle,
+        title: props.btnLinkTitle || '',
       }),
       attr: {
         'class': props.bgdForm,
