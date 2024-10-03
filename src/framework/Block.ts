@@ -3,8 +3,6 @@ import Handlebars from 'handlebars';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface BlockProps {
-  events?: Record<string, (event: Event) => void>;
-  attr?: Record<string, string>;
   [key: string]: unknown;
 }
 
@@ -30,8 +28,8 @@ export default class Block<Props extends BlockProps = any> {
 
   constructor(propsWithChildren: BlockProps = {} as Props) {
     const eventBus = new EventBus();
-    const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
-    this.props = this._makePropsProxy({ ...props });
+    const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren as Props);
+    this.props = this._makePropsProxy({ ...props } as Props);
     this.children = children;
     this.lists = lists;
     this.eventBus = () => eventBus;
