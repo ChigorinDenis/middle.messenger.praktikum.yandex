@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 const METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -8,12 +9,14 @@ const METHODS = {
 
 type Methods = keyof typeof METHODS;
 
-interface RequestOptions {
+interface Options {
   method?: Methods;
   headers?: Record<string, string>;
   data?: Record<string, any> | FormData;
   timeout?: number;
 }
+
+type HTTPMethod = (url: string, options?: Options) => Promise<XMLHttpRequest>
 
 function queryStringify(data: Record<string, any>): string {
   if (typeof data !== 'object') {
@@ -33,23 +36,23 @@ function setHeaders(xhr: XMLHttpRequest, headers: Record<string, string>): void 
 }
 
 class HTTPTransport {
-  get = (url: string, options: Omit<RequestOptions, 'method'> = {}): Promise<XMLHttpRequest> => {
+  get: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
   };
 
-  post = (url: string, options: Omit<RequestOptions, 'method'> = {}): Promise<XMLHttpRequest> => {
+  pos: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
   };
 
-  put = (url: string, options: Omit<RequestOptions, 'method'> = {}): Promise<XMLHttpRequest> => {
+  put: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
   };
 
-  delete = (url: string, options: Omit<RequestOptions, 'method'> = {}): Promise<XMLHttpRequest> => {
+  delete: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   };
 
-  request = (url: string, options: RequestOptions, timeout = 5000): Promise<XMLHttpRequest> => {
+  request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
     const { method, headers = {}, data } = options;
 
     return new Promise((resolve, reject) => {

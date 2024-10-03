@@ -3,10 +3,12 @@ import Handlebars from 'handlebars';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface BlockProps {
-  [key: string]: any;
+  events?: Record<string, (event: Event) => void>;
+  attr?: Record<string, string>;
+  [key: string]: unknown;
 }
 
-export default class Block {
+export default class Block<Props extends BlockProps = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -26,7 +28,7 @@ export default class Block {
 
   protected eventBus: () => EventBus;
 
-  constructor(propsWithChildren: BlockProps = {}) {
+  constructor(propsWithChildren: BlockProps = {} as Props) {
     const eventBus = new EventBus();
     const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
@@ -43,6 +45,17 @@ export default class Block {
       Object.keys(events).forEach(eventName => {
         if (this._element) {
           this._element.addEventListener(eventName, events[eventName]);
+        }
+      })
+    };
+  }
+
+  private _removeEvents(): void {
+    const { events } = this.props;
+    if (events) {
+      Object.keys(events).forEach(eventName => {
+        if (this._element) {
+          this._element.removeEventListener(eventName, events[eventName]);
         }
       })
     };
@@ -70,7 +83,7 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
+  private _componentDidUpdate(oldProps: Props, newProps: Props): void {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -79,7 +92,7 @@ export default class Block {
   }
 
    
-  protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
+  protected componentDidUpdate(oldProps: Props, newProps: BlockProps): boolean {
     console.log(oldProps, newProps);
     return true;
     
@@ -90,7 +103,7 @@ export default class Block {
   }
 
  
-  private _getChildrenPropsAndProps(propsAndChildren: BlockProps): {
+  private _getChildrenPropsAndProps(propsAndChildren: Props): {
     children: Record<string, Block>,
     props: BlockProps,
     lists: Record<string, any[]>
@@ -123,7 +136,7 @@ export default class Block {
     });
   }
 
-  public setProps = (nextProps: BlockProps): void => {
+  public setProps = (nextProps: Props): void => {
     if (!nextProps) {
       return;
     }
@@ -175,6 +188,7 @@ export default class Block {
       this._element.replaceWith(newElement);
     }
     this._element = newElement;
+    this._removeEvents();
     this._addEvents();
     this.addAttributes();
   }
@@ -190,7 +204,7 @@ export default class Block {
     return this._element;
   }
 
-  private _makePropsProxy(props: BlockProps): BlockProps {
+  private _makePropsProxy(props: Props): BlockProps {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
 
