@@ -1,3 +1,4 @@
+
 $background-light: #4B556B;
 $background-dark: #232836;
 $primary-color: #63DAFC;
@@ -13,45 +14,47 @@ $font-size-large: 14px;
 $box-shadow: 0 0 10px 0 $primary-color;
 
 @mixin input-style($padding, $font-size, $border-radius) {
-  width: 100%;
-  padding: $padding;
-  font-size: $font-size;
   border-radius: $border-radius;
+  font-size: $font-size;
+  padding: $padding;
+  width: 100%;
     
   &:focus {
+    box-shadow: inset 0 5px 5px 0 rgba($primary-color, 0.25),
+              inset 0 -5px 5px 0 rgba($primary-color, 0.25);
     outline: 1px solid $primary-color;
-    box-shadow: inset 0 5px 5px 0px rgba($primary-color, 0.25),
-              inset 0 -5px 5px 0px rgba($primary-color, 0.25);
   }
 }
 
 @mixin btn-style($padding, $bg-color, $border-radius) {
-  padding: $padding;
   background: $bg-color;
-  text-align: center;
   border-radius: $border-radius;
+  padding: $padding;
+  text-align: center;
 }
 
 @mixin chat-message($bg-gradient, $align-self, $border-radius) {
-  background: $bg-gradient;
   align-self: $align-self;
+  background: $bg-gradient;
   border-radius: $border-radius;
 }
+
 @mixin flex-column(){
   display: flex;
   flex-direction: column;
 }
 
 @mixin profile-photo($border-radius, $width, $height) {
-  width: $width; 
+  border-radius: $border-radius; 
   height: $height;
   overflow: hidden;
-  border-radius: $border-radius;
-  img {
-    width: 100%;
+  width: $width;
+
+  img { 
+    border-radius: $border-radius;
     height: 100%;
-    object-fit: cover; 
-    border-radius: $border-radius; 
+    object-fit: cover;
+    width: 100%; 
   }
 }
 
@@ -61,18 +64,16 @@ $box-shadow: 0 0 10px 0 $primary-color;
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   background-color: #4B556B;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  color: rgb(255 255 255 / 87%);
+  color-scheme: light dark;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 1.5;
+  text-rendering: optimizelegibility;
 
 }
 
@@ -80,6 +81,7 @@ input, button {
   all: unset; 
   box-sizing: border-box;
 }
+
 ul {
   list-style-type: none;
 }
@@ -91,29 +93,37 @@ ul {
 }
 
 .input-group {
+  color: $primary-color;
   display: flex;
   flex-direction:column;
-  color: $primary-color;
+
   label {
-    font-size:9px;  
+    font-size:12px;  
+  }
+
+  &-error {
+    color: $accent-color2;
+    font-size: 12px;
   }
 }
 
 .container-form {
-  width:100%;
-  height: 100vh;
+  align-items: center;
   display: flex;
+  height: 100vh;
   justify-content: center;
-  align-items: center; 
+  width:100%; 
+
     form {
-      height: auto;
-      width: 26%;
-      min-width: 340px;
-      max-width: 450px;
-      padding:30px;
       box-shadow: 0 0 10px 0  $primary-color;
+      height: auto;
+      max-width: 450px;
+      min-width: 340px;
+      padding:30px;
+      width: 26%;
       
     }
+
     .form-title {
       font-size: 20px;
       text-align: center;
@@ -129,41 +139,38 @@ ul {
 }
 
 .input-shadow {
+  box-shadow: inset 0 5px 5px 0 rgba($primary-color, 0.25),
+            inset 0 -5px 5px 0 rgba($primary-color, 0.25);
   outline: 1px solid $primary-color;
-  box-shadow: inset 0 5px 5px 0px rgba($primary-color, 0.25),
-            inset 0 -5px 5px 0px rgba($primary-color, 0.25);
 }
 
-// .input-large {
-//   padding: 15px;
-//   color: #63DAFC;
-// }
 
 .btn {
   @include btn-style($padding-large, linear-gradient(to right, $accent-color1, $accent-color2), $border-radius-small);
 }
 
 .btn-2 {
-  width: 100%;
-  padding: 8px;
+  border: 2px solid $secondary-color;
   border-radius: 12px;
   font-size: 13px;
+  padding: 8px;
   text-align: center;
-  border: 2px solid $secondary-color;
+  width: 100%;
 }
-.btn-round {
+
+.btn-round { 
+  background-color:  $accent-color2;
+  background-image: url('/icons/next.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
   height: 28px;
   width: 28px;
-  border-radius: 50%;
-  background-image: url('/icons/next.svg');
-  background-repeat: no-repeat;
-  background-position: center center; 
-  background-color:  $accent-color2;
 }
 
 .btn-link {
-  cursor: pointer;
   color: $primary-color;
+  cursor: pointer;
   font-size:13px;
   text-align: center;
   width: 100%;
@@ -172,72 +179,82 @@ ul {
 .btn-group {
   display:flex;
   flex-direction: column;
-  margin-top: 56px;
   gap: 15px;
+  margin-top: 56px;
 }
+
 .btn-group-2 {
   display:flex;
   width: 100%;
 }
 
-.chat-avatar {
-  position: relative;
-  width: 47px;
-  height: 47px;
-  border-radius: 50%; 
+.chat-avatar { 
   /* overflow: hidden; */
   background:  linear-gradient(to right, $secondary-color, $accent-color1);
+  border-radius: 50%;
+  height: 47px;
   padding: 2px;
+  position: relative;
+  width: 47px;
   
 }
+
 .chat-avatar-img {
-  background:  #ffffff;
+  background:  #fff;
+  border-radius: 50%;
   height: 100%;
-  width:100%;
-  border-radius: 50%; 
+  width:100%; 
 }
 
 
 .message {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  font-size: 12px;
   max-width:50%;
   padding: 10px;
-  font-size: 12px;
+
   &-list {
-    height: 100vh;
     display: flex;
     flex-direction: column;
+    height: 100vh;
     padding: 10px 30px;
   }
+
   &-box {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+
   &-header {
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
   }
+
   &-user {
-    background: linear-gradient(to right, #8F8387, $primary-color);
     align-self: flex-end;
-    border-radius: 12px 12px 0 12px;
+    background: linear-gradient(to right, #8F8387, $primary-color);
+    border-radius: 12px 12px 0;
   }
+
   &-other {
-    background: linear-gradient(to right, $secondary-color, $accent-color1);
     align-self: flex-start;
-    border-radius: 0 12px 12px 12px;
+    background: linear-gradient(to right, $secondary-color, $accent-color1);
+    border-radius: 0 12px 12px;
   }
+
   &-time {
     align-self: flex-end;
   }
+
   &-input {
     margin-top: auto;
     position: relative;
+
     .btn-round {
       position: absolute;
       right: 10px;
@@ -260,23 +277,22 @@ ul {
 
 
 .chat-list {
-  width: 100%;
-  margin: 0 auto;
-  // padding: 10px;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
 }
 
 
 .chat-item {
-
+  align-items: center;
+  border-radius: 32px 0 0 32px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 10px;
   margin-top: 0;
-  border-radius: 32px 0 0 32px;
+  padding: 10px;
   position: relative;
+
     &:hover {
       background: #232836;
     }
@@ -286,10 +302,10 @@ ul {
 
 
 .chat-avatar img {
-  width: 50px;
-  height: 50px;
   border-radius: 50%;
+  height: 50px;
   object-fit: cover;
+  width: 50px;
 }
 
 .chat-info {
@@ -299,18 +315,18 @@ ul {
 
 
 .chat-header {
+  align-items: flex-start;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: 5px;
   
 }
 
 
 .chat-name {
-  font-weight: bold;
-  font-size: 13px;
   color: $primary-color;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 
@@ -322,73 +338,79 @@ ul {
 
 .chat-last-message {
   font-size: 12px;
- 
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
 .chat-unread {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 25px;
-  height: 25px;
   background-color: $accent-color2;
   border-radius: 50%;
+  bottom: 10px;
   color: white;
+  display: flex;
   font-size: 12px;
   font-weight: bold;
+  height: 25px;
+  justify-content: center;
+  position: absolute;
+  right: 10px;
   text-align: center;
+  width: 25px;
 }
 
 
-/*-------side-panel----*/
+/* -------side-panel---- */
 .side-panel {
   background-color: $background-light;
   height: 100vh;
-  width: 100%;
   padding: $padding-small;
+  width: 100%;
+
   &-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 18px;
   }
+
   &-search {
     margin-bottom: 23px;
   }
 }
 
 .user {
-  display: flex;
   align-items: center;
+  display: flex;
+
   &-info{
-    margin-left: 10px;
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
   }
+
   &-title {
-    font-weight: bold;
-    font-size: 13px;
     color: $primary-color;
+    font-size: 13px;
+    font-weight: bold;
   }
+
   &-profile {
     font-size: 12px;
   }
 }
 
-/*------chatPage-------*/
+/* ------chatPage------- */
 .main-page {
   display: flex;
   width: 100%;
+
   .left {
    width: 26%;
    
   }
+
   .right {
     width: 74%;
   }
@@ -398,41 +420,47 @@ ul {
 
 .profile-photo {
   position: relative;
+
   @include profile-photo(12px, 100%, auto)
 }
 
 .profile-name {
-  position: absolute;
+  background: rgb(0 0 0 / 60%);
   bottom: 0;
+  color: white;
+  font-size: 14px;
   left: 0;
+  padding: 5px;
+  position: absolute;
   right: 0;
   text-align: left;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 5px 5px;
-  font-size: 14px;
 }
 
 .profile-photo-round {
   margin: 0 auto 20px;
+
   @include profile-photo(50%, 135px, 135px);
 }
 
 
 .profile-info {
   width: 100%;
+
   &-item {
     display: flex;
     margin-bottom: 20px;
   }
+
   &-data {
     display: flex;
     flex-direction: column;
     margin-left: 23px;
   }
+
   &-subtitle {
     color: $primary-color;
   }
+
   &-btn{
     margin-top: 50px;
   }

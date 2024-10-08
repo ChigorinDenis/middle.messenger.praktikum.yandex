@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "targets": {
+    "default": {
+      "includeNodeModules": true
+    }
+  },
   "engines": {
     "node": ">=20.0.0"
   },
@@ -11,18 +16,26 @@
     "build": "vite build",
     "start": "vite build && node server.cjs",
     "preview": "vite preview",
-    "lint": "npx eslint src/"
+    "lint": "npx eslint src",
+    "lint:styles": "stylelint '**/*.{css,scss}' --fix"
   },
   "devDependencies": {
-    "@eslint/js": "^9.10.0",
+    "@eslint/js": "^9.11.1",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.10.0",
+    "eslint": "^9.11.1",
     "globals": "^15.9.0",
     "postcss": "^8.4.45",
     "postcss-preset-env": "^10.0.2",
     "postcss-scss": "^4.0.9",
+    "sass-embedded": "^1.79.3",
+    "stylelint": "^16.9.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-order": "^6.0.4",
+    "stylelint-scss": "^6.7.0",
+    "typescript": "^5.6.2",
     "vite": "^5.4.1",
-    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-handlebars": "^2.0.0",
     "vite-plugin-raw": "^1.0.3"
   },

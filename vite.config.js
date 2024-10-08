@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 // import eslint from 'vite-plugin-eslint'
 import handlebars from 'vite-plugin-handlebars'
-// import vitePluginString from 'vite-plugin-string';
 import ViteRawPlugin  from 'vite-plugin-raw';
 
 export default defineConfig({
@@ -14,6 +13,9 @@ export default defineConfig({
   ],
   css: {
     postcss: './postcss.config.js',
+    scss: {
+      api: 'legacy-js-api', // or "modern", "legacy"
+    },
 
   },
   assetsInclude: ['**/*.hbs'],
