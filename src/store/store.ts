@@ -8,7 +8,7 @@ export enum StoreEvents {
 
 class Store extends EventBus {
   
-  protected state: Record<string, unknown>;
+  protected state: Record<string, unknown> = {};
 
   public getState() {
     return this.state;

@@ -1,14 +1,14 @@
 import './style.scss';
 import App from './App';
 
-import UserApi from './api/userApi';
+import UserApi from './api/authApi';
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const app = new App();
-//   app.render();
-// });
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new App();
+  app.render();
+});
 
-const userApi = new UserApi();
+// const userApi = new UserApi();
 
-userApi.getUser();
-console.log('');
+// userApi.getUser();
+// console.log('');

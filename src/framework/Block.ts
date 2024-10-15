@@ -3,7 +3,7 @@ import Handlebars from 'handlebars';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface BlockProps {
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export default class Block {
@@ -91,7 +91,7 @@ export default class Block {
 
    
   protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
-    console.log(oldProps, newProps);
+    // console.log(oldProps, newProps);
     return true;
     
   }
