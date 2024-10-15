@@ -16,7 +16,6 @@ export default defineConfig({
     scss: {
       api: 'legacy-js-api', // or "modern", "legacy"
     },
-
   },
   assetsInclude: ['**/*.hbs'],
   publicDir: 'static',
