@@ -2,6 +2,8 @@ import Block from "../../framework/Block";
 import InputGroup from '../../components/InputGroup/InputGroup';
 import Button from '../../components/Button/Button';
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
+import connect from '../../store/connect'
+import store from '../../store/store';
 
 type FormSettings = {
   title: string,
@@ -13,15 +15,15 @@ type FormSettings = {
   btnStyle?: string,
 }
 
-
-export default class Form extends Block {
+ class Form extends Block {
   
   constructor(props: FormSettings) {
 
     const onChange = (e: Event): void => {
       const target = e.target as HTMLInputElement;
       const { name, value } = target;
-      console.log(name, value);
+      store.set(name, value);
+      console.log('state', store.getState());
     }
     
     const onBlur = (e: Event): void => {
@@ -101,3 +103,5 @@ export default class Form extends Block {
     `;
   }
 }
+
+export default connect(Form, (state) => state)
