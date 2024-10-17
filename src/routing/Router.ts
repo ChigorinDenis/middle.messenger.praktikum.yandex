@@ -2,10 +2,15 @@ import Route from './Route';
 import Block from '../framework/Block';
 
 type BlockConstructor = new () => Block;
+type Middleware = (pathname: string) => boolean;
+interface RouteWithMiddleware {
+  route: Route;
+  middleware?: Middleware;
+}
 
 export default class Router {
 
-  protected routes: Route[];
+  protected routes: RouteWithMiddleware[];
 
   protected history;
 
@@ -28,9 +33,9 @@ export default class Router {
       Router.__instance = this;
   }
 
-  use(pathname:string, block: BlockConstructor) {
+  use(pathname:string, block: BlockConstructor, middleware?: Middleware) {
       const route = new Route(pathname, block, {rootQuery: this._rootQuery});
-      this.routes.push(route);
+      this.routes.push({ route, middleware});
       return this;
   }
 
@@ -43,7 +48,19 @@ export default class Router {
   }
 
   _onRoute(pathname:string) {
-      const route = this.getRoute(pathname);
+      const routeData = this.getRoute(pathname);
+       if (!routeData) {
+          console.error(`Route not found for pathname: ${pathname}`);
+          return;
+      }
+
+      const { route, middleware } = routeData;
+
+      // Проверяем middleware перед рендерингом маршрута
+      if (middleware && !middleware(pathname)) {
+          console.warn(`Middleware blocked access to: ${pathname}`);
+          return;
+      }
 
       if (this._currentRoute && this._currentRoute !== route) {
           this._currentRoute.leave();
@@ -51,13 +68,16 @@ export default class Router {
 
       this._currentRoute = route || null;
 
-      if (route) {
-        route.render();
-      }
+      route.render();
+      
       
   }
 
   go(pathname: string) {
+    if (this._currentRoute && this._currentRoute.match(pathname)) {
+      return;
+    }
+    
     if (this.history) {
       this.history.pushState({}, '', pathname);
     }
@@ -78,6 +98,6 @@ export default class Router {
   }
 
   getRoute(pathname:string) {
-      return this.routes.find(route => route.match(pathname));
+      return this.routes.find(({route}) => route.match(pathname));
   }
 }

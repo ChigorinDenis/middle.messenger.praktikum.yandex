@@ -1,5 +1,5 @@
 import EventBus from '../framework/EventBus';
-import { set } from '../utils/utils';
+import { set, get } from '../utils/utils';
 
 export enum StoreEvents {
   Updated = 'updated',
@@ -10,8 +10,8 @@ class Store extends EventBus {
   
   protected state: Record<string, unknown> = {};
 
-  public getState() {
-    return this.state;
+  public getState(path: string = '') {
+    return get(this.state, path);
   }
 
   public set(path: string, value: unknown) {

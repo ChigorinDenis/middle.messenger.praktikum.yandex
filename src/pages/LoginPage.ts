@@ -2,7 +2,9 @@ import Form from '../layouts/Form/Form';
 import Block from '../framework/Block';
 import getValidationFunc from '../validation/validation';
 import validationRules from '../validation/validationRules';
+import UserLoginController from '../controllers/userLoginController';
 
+const userLoginController = new UserLoginController();
      
 const inputGroupList: InputGroupSettings[] = [
   {
@@ -39,6 +41,7 @@ export default class LoginPage  extends Block{
         inputGroupList,
         validate,
         bgdForm: 'bgd-dark',
+        controller: userLoginController
       })
     });
   }

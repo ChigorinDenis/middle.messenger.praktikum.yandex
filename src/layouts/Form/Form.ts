@@ -13,6 +13,7 @@ type FormSettings = {
   validate: (name:string, value: string | number) => string | null;
   bgdForm?: string,
   btnStyle?: string,
+  controller?: FormController
 }
 
  class Form extends Block {
@@ -23,7 +24,11 @@ type FormSettings = {
       const target = e.target as HTMLInputElement;
       const { name, value } = target;
       store.set(name, value);
-      console.log('state', store.getState());
+      // const index = props.inputGroupList.findIndex((prop) => prop.name === name);
+      // if (index != -1) {
+      //   this.lists.inputGroupList[index].setProps({ value });
+      // }
+      console.log('value', value);
     }
     
     const onBlur = (e: Event): void => {
@@ -40,7 +45,7 @@ type FormSettings = {
       e.preventDefault();
       const form = this.getContent() as HTMLFormElement;
         const formData = new FormData(form);
-    
+        
         let isFormDataValid = true;
         props.inputGroupList.forEach(({ name }) => {
           const value = formData.get(name) as string || '';
@@ -53,11 +58,12 @@ type FormSettings = {
             }
           }
         });
-        if (!isFormDataValid) {
-          console.log('Form  data is not valid')
-          return;
-        }
+        // if (!isFormDataValid) {
+        //   console.log('Form  data is not valid')
+        //   return;
+        // }
         console.log('formData', Object.fromEntries(formData));
+        props.controller?.onSubmit(Object.fromEntries(formData));
       }
 
 
