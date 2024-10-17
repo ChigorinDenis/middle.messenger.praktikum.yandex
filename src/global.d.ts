@@ -58,3 +58,12 @@ type MessageSettings = {
 type Indexed<T = unknown> = {
   [key in string]: T;
 };
+
+interface FormController {
+  onSubmit(data: Indexed): void;
+}
+
+interface LoginFormModel {
+  email: string;
+  password: string;
+}

@@ -68,10 +68,19 @@ export default class App {
     // if (this.appElement) {
     //   this.appElement.replaceChildren(mainPage.getContent());
     // }
+    const requireAuth = (pathname: string) => {
+      const isAuthenticated = false;
+      if (!isAuthenticated) {
+        router.go('/login');
+        return false;
+      }
+      return true;
+    };
+
     const router = new Router('#app');
     router
-    .use('/', ChatPage)
-    .use('/login', LoginPage)
+    .use('/', ChatPage, requireAuth)
+    .use('/login', LoginPage,)
     .use('/signup', SignupPage)
     .use('/profile', ProfilePage)
     .use('/edit-password', EditPasswordPage)

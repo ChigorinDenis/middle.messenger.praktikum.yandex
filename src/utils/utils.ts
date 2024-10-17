@@ -23,6 +23,28 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
   return object;
 }
 
+function get(object: Indexed | unknown, path: string) {
+  if (typeof path !== 'string') {
+    throw new Error('path must be string');
+  }
+
+  if (typeof object !== 'object' || object === null) {
+    return object;
+  }
+  if (path === '') {
+    return object;
+  }
+  const keys = path.split('.');
+  const key = keys[0];
+  if (keys.length === 1) {
+    return (object as Indexed)[key];  
+  }
+  if (typeof (object as Indexed)[key] !== 'object' || (object as Indexed)[key] === null) {
+    (object as Indexed)[key] = {};
+  }
+  return get((object as Indexed)[key],  keys.slice(1).join('.'))
+}
+
 function isEqual(a: Record<string, unknown>, b: Record<string, unknown>): boolean {
 
 if (a === b) {
@@ -84,5 +106,5 @@ return typeof value === 'object'
 function isArrayOrObject(value: unknown): value is ([] | Indexed) {
   return isPlainObject(value) || isArray(value);
 } 
-export { set, isEqual, cloneDeep };
+export { set, get, isEqual, cloneDeep };
 
