@@ -6,9 +6,30 @@ export enum StoreEvents {
 }
 
 
+
+const initState: State = {
+  auth: {
+    user: null
+  },
+  chats: [],
+  messages: {},
+  ui: {
+    currentChatId: null,
+    modalActive: {
+      name: '',
+      value: ''
+    }
+  }
+}
+
 class Store extends EventBus {
   
-  protected state: Record<string, unknown> = {};
+  protected state: State;
+
+  constructor() {
+    super();
+    this.state = initState;
+  }
 
   public getState(path: string = '') {
     return get(this.state, path);

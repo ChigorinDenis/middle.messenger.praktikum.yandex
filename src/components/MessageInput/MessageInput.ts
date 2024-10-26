@@ -3,7 +3,7 @@ import Input from "../Input/Input";
 import validationRules from "../../validation/validationRules";
 import getValidationFunc from "../../validation/validation";
 
-const onEnter = (e:KeyboardEvent):void => {
+const onEnter = (controller: MessageControllerInterface) => (e:KeyboardEvent):void => {
   const target = e.target as HTMLInputElement;
   if (e.key === 'Enter') {
     const { name, value } = target;
@@ -12,19 +12,20 @@ const onEnter = (e:KeyboardEvent):void => {
     if (error) {
       alert(error);
     }
+    controller.send(value);
     target.value = '';
   }
   }
 
 export default class MessageInput extends Block {
-  constructor() {
+  constructor(props:Indexed) {
     super({
       input: new Input({
         name: 'message',
         type:'text',
         placeholder:'Сообщение',
         inputClass: 'input-field bgd-light',
-        onEnter, 
+        onEnter: onEnter(props.controller), 
       })
     });
   }

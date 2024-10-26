@@ -1,17 +1,17 @@
-import UserApi from '../api/userApi';
+import AuthApi from '../api/authApi';
 import store from '../store/store';
 import Router from '../routing/Router'
 
 const router = new Router('#app');
-const userApi = new UserApi();
+const authApi = new AuthApi();
 
 export default class UserSignupController implements FormController {
   public async signup() {
     try {
-      const signupResponse = await userApi.create();
+      const signupResponse = await authApi.create();
       if(signupResponse.response === 'OK') {
         console.log('Signup successful');
-        const userResponse = await userApi.getUser();
+        const userResponse = await authApi.getUser();
         store.set('auth.user', userResponse.response);
         console.log(store.getState('auth.user'));
         router.go('/');

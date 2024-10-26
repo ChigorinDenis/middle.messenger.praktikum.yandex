@@ -6,8 +6,8 @@ import MessageBox from '../layouts/MessageBox/MessageBox';
 export default class ProfilePage extends Block {
   constructor() {
     super({
-      MessageBox: new MessageBox(),
-      ProfileInfo: new ProfileInfo(),
+      MessageBox: new MessageBox({}),
+      ProfileInfo: new ProfileInfo({}),
     });
   }
   

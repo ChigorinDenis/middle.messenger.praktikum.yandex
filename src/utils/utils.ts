@@ -23,27 +23,29 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
   return object;
 }
 
-function get(object: Indexed | unknown, path: string) {
+function get(object: Indexed | unknown, path: string): unknown {
   if (typeof path !== 'string') {
     throw new Error('path must be string');
   }
 
   if (typeof object !== 'object' || object === null) {
-    return object;
+    return undefined;
   }
+
   if (path === '') {
     return object;
   }
   const keys = path.split('.');
-  const key = keys[0];
-  if (keys.length === 1) {
-    return (object as Indexed)[key];  
+  let result: unknown = object;
+  for (const key of keys) {
+    if (typeof result !== 'object' || result === null || !(key in result)) {
+      return undefined;
+    }
+    result = (result as Indexed)[key];
   }
-  if (typeof (object as Indexed)[key] !== 'object' || (object as Indexed)[key] === null) {
-    (object as Indexed)[key] = {};
-  }
-  return get((object as Indexed)[key],  keys.slice(1).join('.'))
+  return result;
 }
+
 
 function isEqual(a: Record<string, unknown>, b: Record<string, unknown>): boolean {
 

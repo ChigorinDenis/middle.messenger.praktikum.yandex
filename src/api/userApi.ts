@@ -2,12 +2,11 @@ import HTTP from '../utils/http/http';
 import BaseAPI from '../utils/http/baseApi';
 
 
-
 export default class UserApi extends BaseAPI {
   private apiInstance: HTTP;
 
   constructor() {
-    super('auth');
+    super('user');
     this.apiInstance = new HTTP();
   }
 
@@ -22,21 +21,21 @@ export default class UserApi extends BaseAPI {
     };
     return this.apiInstance.post(`${this.apiURL}/signup`, { data: user,})
   }
-
-  public login(data: Indexed): Promise<XMLHttpRequest> {
-    const auth = {
-      "login": "chadaRodis",
-      "password": "rodisChada",
-    }
-    return this.apiInstance.post(`${this.apiURL}/signin`, { data });  
+  
+  public searchUser(data: Indexed): Promise<XMLHttpRequest> {
+    return this.apiInstance.post(`${this.apiURL}/search`, { data })
   }
 
-  public logout(): Promise<XMLHttpRequest> {
-    return this.apiInstance.post(`${this.apiURL}/logout`);
+  public updateUser(data: Indexed): Promise<XMLHttpRequest> {
+    return this.apiInstance.put(`${this.apiURL}/profile`, { data })
   }
 
-  public getUser(): Promise<XMLHttpRequest> {
-    return this.apiInstance.get(`${this.apiURL}/user`)
+  public updatePassword(data: Indexed): Promise<XMLHttpRequest> {
+    return this.apiInstance.put(`${this.apiURL}/password`, { data })
+  }
+  
+  public updateAvatar(data: FormData): Promise<XMLHttpRequest> {
+    return this.apiInstance.put(`${this.apiURL}/profile/avatar`, { data })
   }
 
 }

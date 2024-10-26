@@ -7,7 +7,7 @@ import MessageBox from '../layouts/MessageBox/MessageBox';
 export default class EditProfilePage extends Block {
   constructor() {
     super({
-      MessageBox: new MessageBox(),
+      MessageBox: new MessageBox({}),
       EditProfile: new EditProfile(),
     });
   
