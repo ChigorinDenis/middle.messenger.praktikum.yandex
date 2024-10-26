@@ -5,10 +5,7 @@ import ModalAdd from '../layouts/Modal/Modal';
 import modalAddUserToChat from '../controllers/modalAddUserToChat';
 import modalCreateChatController from '../controllers/modalCreateChatController';
 import modalDeleteChatController from '../controllers/modalDeleteChatController';
-import store from '../store/store';
-import socket from '../controllers/messagesController'
-import Router from '../routing/Router';
-const router = new Router('#app')
+// import socket from '../controllers/messagesController'
 
 
 export default class PageChat extends Block {

@@ -17,7 +17,7 @@ export default class UserSignupController implements FormController {
         router.go('/');
       }
     } catch (error) {
-      
+      console.log(error);
     }
     
   }

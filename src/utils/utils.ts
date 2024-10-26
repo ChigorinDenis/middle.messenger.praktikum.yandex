@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
   if (typeof path !== 'string') {
     throw new Error('path must be string');

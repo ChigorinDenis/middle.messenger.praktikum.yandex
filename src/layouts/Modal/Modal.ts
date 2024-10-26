@@ -24,7 +24,7 @@ class ModalAdd extends Block {
      }),
      Button: new Button({
       title: props.btnName,
-      onClick: (e: Event) => {
+      onClick: () => {
         props.controller.onSubmit();
         store.set('ui.modalActive.name', null);
       }

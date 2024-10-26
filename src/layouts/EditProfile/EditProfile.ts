@@ -68,7 +68,7 @@ const inputGroupList: InputGroupSettings[] = [
 export default class EditPassword extends Block {
   constructor() {
     super({
-      ProfilePhotoRound: new ProfilePhotoRound(),
+      ProfilePhotoRound: new ProfilePhotoRound({}),
       Form: new Form({
         title: '',
         btnSubmitTitle: 'Сохранить',
@@ -81,7 +81,7 @@ export default class EditPassword extends Block {
       IconBack: new IconButton({
         img_src: '/icons/arrow_back.svg',
         alt: 'back',
-        onClick: (e:Event) => {
+        onClick: () => {
           router.go('/settings')
         }
       }),

@@ -2,42 +2,45 @@ import Block from '../../framework/Block';
 import Button from '../../components/Button/Button';
 import IconButton from '../../components/IconButton/IconButton';
 import ProfilePhoto from '../../components/ProfilePhoto/ProfilePhoto';
+import UserLoginController from '../../controllers/userLoginController';
 import connect from '../../store/connect'
-import store from '../../store/store';
 import Router from '../../routing/Router';
 
-
+const userLoginController = new UserLoginController();
 const router = new Router('#app');
 const baseURL = import.meta.env.VITE_API_URL;
-const joinImagePath = (img:any) => ([baseURL, 'resources', img].join('/'));
+const joinImagePath = (img:string) => ([baseURL, 'resources', img].join('/'));
 
 class ProfileInfo extends Block {
   constructor(props:Indexed) {
     super({
       ProfilePhoto: new ProfilePhoto({
         display_name: props.display_name,
-        img_src: joinImagePath(props.avatar)
+        img_src: joinImagePath(props.avatar as string)
       }),
       ButtonChangeData: new Button({
         title: 'Изменить данные',
         btnStyle:'btn-2',
-        onClick: (e:Event) => {router.go('/edit-profile')}
+        onClick: () => {router.go('/edit-profile')}
       }),
       ButtonChangePassword: new Button({
         title: 'Изменить пароль',
         btnStyle:'btn-link',
-        onClick: (e:Event) => {router.go('/edit-password')}
+        onClick: () => {router.go('/edit-password')}
       }),
       IconBack: new IconButton({
         img_src: '/icons/arrow_back.svg',
         alt: 'back',
-        onClick: (e:Event) => {
+        onClick: () => {
           router.go('/')
         }
       }),
       IconLogout: new IconButton({
         img_src: '/icons/Log out.svg',
         alt: '',
+        onClick: () => {
+          userLoginController.logout()
+        }
       }),
       ...props,
     });

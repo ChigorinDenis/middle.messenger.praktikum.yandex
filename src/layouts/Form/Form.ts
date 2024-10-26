@@ -58,10 +58,10 @@ type FormSettings = {
             }
           }
         });
-        // if (!isFormDataValid) {
-        //   console.log('Form  data is not valid')
-        //   return;
-        // }
+        if (!isFormDataValid) {
+          console.log('Form  data is not valid')
+          return;
+        }
         console.log('formData', Object.fromEntries(formData));
         props.controller?.onSubmit(Object.fromEntries(formData));
       }

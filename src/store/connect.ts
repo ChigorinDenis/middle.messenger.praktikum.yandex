@@ -1,7 +1,6 @@
 import Block from "../framework/Block";
 import store from "./store";
 import { StoreEvents } from "./store";
-import ChatsList from "../layouts/ChatsList/ChatsList";
 
 interface BlockProps {
   [key: string]: unknown;
@@ -9,7 +8,7 @@ interface BlockProps {
 
 interface ListUpdateProps {
   key: string, 
-  createItemCallback: (item: any) => Block
+  createItemCallback: (item: Indexed) => Block
 }
 
 function connect(

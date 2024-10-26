@@ -1,8 +1,5 @@
 import UserApi from '../api/userApi';
-import store from '../store/store';
-import Router from '../routing/Router'
 
-const router = new Router('#app');
 const userApi = new UserApi();
 
 export default class UserPasswordController implements FormController {

@@ -1,4 +1,3 @@
-import Block from "./framework/Block";
 import Links from "./layouts/Links/Links";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -12,12 +11,12 @@ import Router from "./routing/Router";
 import store, {StoreEvents} from './store/store'
 import AuthApi from "./api/authApi";
 
-interface PageClass {
-  new (): Block
-}
-type  MappingPage = {
-  [key: string]: PageClass
-}
+// interface PageClass {
+//   new (): Block
+// }
+// type  MappingPage = {
+//   [key: string]: PageClass
+// }
 
 export default class App {
 
@@ -28,14 +27,6 @@ export default class App {
     this.appElement = document.getElementById('app');
     this.nav = document.getElementById('temp');
     store.on(StoreEvents.Updated, () => {});
-    // window.addEventListener('beforeunload', (event) => {
-      
-    //   console.log('Страница перезагружается или закрывается.');
-    
-    
-    //   event.preventDefault();
-    
-    // });
   }
 
   render(): string {

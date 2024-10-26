@@ -19,14 +19,14 @@ export default class SidePanel extends Block {
       ButtonAdd: new Button({
         title: 'Создать чат',
         btnStyle: 'btn-2-small',
-        onClick: (e:Event) => {
+        onClick: () => {
           store.set('ui.modalActive.name', 'createChat');
         }
       }),
       IconSetting: new IconButton({
         img_src: '/icons/settings.svg',
         alt: 'settings',
-        onClick: (e:Event) => {
+        onClick: () => {
           console.log('onclick icon')
           router.go('/settings')
         }
@@ -58,5 +58,3 @@ export default class SidePanel extends Block {
             </div>`;
   }
 }
-
-
