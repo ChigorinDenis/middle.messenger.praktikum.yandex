@@ -157,6 +157,7 @@ ul {
   text-align: center;
   width: 100%;
 }
+
 .btn-2-small {
   border: 2px solid $secondary-color;
   border-radius: 12px;
@@ -164,6 +165,7 @@ ul {
   padding: 8px;
   text-align: center;
 }
+
 .btn-round { 
   background-color:  $accent-color2;
   background-image: url('/icons/next.svg');
@@ -229,11 +231,11 @@ ul {
   }
 
   &-box {
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 10px;
+    justify-content: space-between;
+    overflow-y: auto;
   }
 
   &-header {
@@ -300,9 +302,11 @@ ul {
   margin-top: 0;
   padding: 10px;
   position: relative;
+
     &:hover {
       background: #232836;
     }
+
     &.chat-current {
       background: #232836;
     }
@@ -386,10 +390,10 @@ ul {
   }
 
   &-search {
-    margin-bottom: 23px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 23px;
   }
 }
 
@@ -490,28 +494,31 @@ ul {
 }
 
 .modal-area {
+  background: rgb(0 0 0 / 40%);
   display: none;
-  width: 100%;
   height: 100vh;
   position: absolute;
-  background: rgb(0 0 0 / 40%);
+  width: 100%;
+
   &.modal-open {
     display: block;
   }
 }
-.modal-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: auto;
-  padding: 20px;;
+
+.modal-container {;
   background-color: $background-dark;
   display:  flex;
   flex-direction: column;
-  justify-content: center;
   gap: 20px;
+  height: auto;
+  justify-content: center;
+  left: 50%;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+
   h3 {
     text-align: center;
   }
