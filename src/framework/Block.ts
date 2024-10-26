@@ -1,6 +1,6 @@
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
-import { isEqual } from '../utils/utils';
+// import { isEqual } from '../utils/utils';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface BlockProps {
@@ -113,9 +113,9 @@ export default class Block {
 
    
   protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
-    // console.log(oldProps, newProps);
-    return isEqual(oldProps, newProps)
-    // return true;
+    console.log(oldProps, newProps);
+    // return isEqual(oldProps, newProps)
+    return true;
     
   }
 
