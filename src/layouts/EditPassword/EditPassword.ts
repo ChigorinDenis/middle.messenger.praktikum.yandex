@@ -45,7 +45,7 @@ const inputGroupList: InputGroupSettings[] = [
 export default class EditPassword extends Block {
   constructor() {
     super({
-      ProfilePhotoRound: new ProfilePhotoRound(),
+      ProfilePhotoRound: new ProfilePhotoRound({}),
       Form: new Form({
         title: '',
         btnSubmitTitle: 'Сохранить',

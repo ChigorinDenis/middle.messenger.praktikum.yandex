@@ -6,7 +6,7 @@ import MessageBox from '../layouts/MessageBox/MessageBox';
 export default class EditPasswordPage extends Block {
   constructor() {
     super({
-      MessageBox: new MessageBox(),
+      MessageBox: new MessageBox({}),
       EditPassword: new EditPassword(),
     });
   }

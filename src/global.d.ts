@@ -84,6 +84,10 @@ interface Modal {
   inputHidden?: boolean
 }
 
+interface MessageControllerInterface {
+  send: (message: Message) => void
+}
+
 interface Message {
     chat_id: number,
     time: string,
