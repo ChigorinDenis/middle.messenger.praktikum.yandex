@@ -31,7 +31,7 @@ export default class Block {
     const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
     this.children = children;
-    this.lists = lists;
+    this.lists = this._makePropsProxy({ ...lists });
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
@@ -81,12 +81,33 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
+
   private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
     }
-    this._render(); 
+    this._render();
+
+    // Object.values(this.lists).forEach((list) => {
+    //   list.forEach((item) => {
+    //     console.log('item',item) 
+    //     if (item instanceof Block) {
+    //       item.render()
+    //       console.log('item getcont',item.getContent());
+    //     }
+    //   }) 
+    // })
+    
+  }
+
+  public updateList(key: string, listProps: any[], createItemCallback: (item: any) => Block): void {
+    if (!Array.isArray(listProps)) {
+      throw new Error(`${key} is not an array`);
+    }
+    const updatedItems = listProps.map(createItemCallback);
+    this.lists[key] = updatedItems;
+    this._render();
   }
 
    
@@ -213,7 +234,6 @@ export default class Block {
       },
       set(target: BlockProps, prop: string, value: any) {
         const oldTarget = { ...target };
-        
         target[prop] = value;
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;

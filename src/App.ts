@@ -9,6 +9,8 @@ import EditProfilePage from './pages/EditProfilePage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from "./pages/ChatPage";
 import Router from "./routing/Router";
+import store, {StoreEvents} from './store/store'
+import AuthApi from "./api/authApi";
 
 interface PageClass {
   new (): Block
@@ -25,55 +27,42 @@ export default class App {
   constructor() {
     this.appElement = document.getElementById('app');
     this.nav = document.getElementById('temp');
+    store.on(StoreEvents.Updated, () => {});
+    // window.addEventListener('beforeunload', (event) => {
+      
+    //   console.log('Страница перезагружается или закрывается.');
+    
+    
+    //   event.preventDefault();
+    
+    // });
   }
 
   render(): string {
-    // const mappingPage:MappingPage = {
-    //   main: ChatPage,
-    //   login: LoginPage,
-    //   signup: SignupPage,
-    //   page500: Page500,
-    //   page404: Page404,
-    //   profile: ProfilePage,
-    //   edit: EditProfilePage,
-    //   password: EditPasswordPage   
-    // };
-    
+   
     const links = new Links();
     if (this.nav) {
       this.nav.innerHTML = links.render();
     }
     
-    // const navigation = this.nav?.querySelector('.nav-container');
-
-    // if (navigation) {
-    //   navigation.addEventListener('click', (event: Event) => {
-    //     event.preventDefault();
-    //     const target = event.target as HTMLElement;
-    //     if (target.classList.contains('nav-links')) {
-    //       const pageName = target.getAttribute('data-template');
-    //       if (pageName && mappingPage[pageName]) {
-    //         const Page = mappingPage[pageName];
-    //         const newPage = new Page();
-    //         if (this.appElement) {
-    //           this.appElement.replaceChildren(newPage.getContent());
-    //         }
-    //       }
-    //     }
-    //   });
-    // }
-
-    // const Page = mappingPage['main'];
-    // const mainPage = new Page();
-    // if (this.appElement) {
-    //   this.appElement.replaceChildren(mainPage.getContent());
-    // }
-    const requireAuth = (pathname: string) => {
-      const isAuthenticated = false;
-      if (!isAuthenticated) {
+    const requireAuth = async () => {
+      const userStore = store.getState('auth.user');
+      if (!userStore) {
+        try {
+          const authApi = new AuthApi();
+          const userResponse = await authApi.getUser();
+          if (userResponse.status === 200) {
+            console.log('store', store.getState())
+            store.set('auth.user', JSON.parse(userResponse.response));
+            return true;
+          }
+        } catch (error) {
+          console.log('Ошибка авторизации', error)
+        }
         router.go('/login');
         return false;
       }
+
       return true;
     };
 
@@ -81,8 +70,8 @@ export default class App {
     router
     .use('/', ChatPage, requireAuth)
     .use('/login', LoginPage,)
-    .use('/signup', SignupPage)
-    .use('/profile', ProfilePage)
+    .use('/sign-up', SignupPage)
+    .use('/settings', ProfilePage)
     .use('/edit-password', EditPasswordPage)
     .use('/edit-profile', EditProfilePage)
     .use('/404', Page404)

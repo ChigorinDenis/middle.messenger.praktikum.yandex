@@ -1,20 +1,37 @@
 import Block from "../framework/Block";
 import store from "./store";
 import { StoreEvents } from "./store";
+import ChatsList from "../layouts/ChatsList/ChatsList";
 
 interface BlockProps {
   [key: string]: unknown;
 }
 
+interface ListUpdateProps {
+  key: string, 
+  createItemCallback: (item: any) => Block
+}
+
 function connect(
   Component: typeof Block,
-  mapStateToProps: (state: Indexed) => Indexed
+  mapStateToProps: (state: Indexed) => Indexed,
+  listUpdateProps: ListUpdateProps | null = null,
+  mapStateToListProps: ((state: Indexed) => Indexed) | null = null,
 ) {
   return class extends Component {
     constructor(props: BlockProps) {
-      super({ ...props, ...mapStateToProps(store.getState()) });
+      super({ ...props, ...mapStateToProps(store.getState() as Indexed) });
+ 
       store.on(StoreEvents.Updated, () => {
-        this.setProps({ ...mapStateToProps(store.getState()) });
+        const newProps = mapStateToProps(store.getState() as Indexed);
+        this.setProps(newProps);
+        if (listUpdateProps != null && mapStateToListProps != null) {
+          const listProps = mapStateToListProps(store.getState() as Indexed);
+            if (Array.isArray(listProps)) {
+              this.updateList(listUpdateProps.key, listProps, listUpdateProps.createItemCallback)
+            }
+         
+        }
       });
     }
   };

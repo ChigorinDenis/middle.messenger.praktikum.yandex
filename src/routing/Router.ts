@@ -2,7 +2,9 @@ import Route from './Route';
 import Block from '../framework/Block';
 
 type BlockConstructor = new () => Block;
-type Middleware = (pathname: string) => boolean;
+
+type Middleware = () => boolean | Promise<boolean>;
+
 interface RouteWithMiddleware {
   route: Route;
   middleware?: Middleware;
@@ -47,7 +49,7 @@ export default class Router {
     this._onRoute(window.location.pathname)
   }
 
-  _onRoute(pathname:string) {
+  async _onRoute(pathname:string) {
       const routeData = this.getRoute(pathname);
        if (!routeData) {
           console.error(`Route not found for pathname: ${pathname}`);
@@ -56,28 +58,29 @@ export default class Router {
 
       const { route, middleware } = routeData;
 
-      // Проверяем middleware перед рендерингом маршрута
-      if (middleware && !middleware(pathname)) {
-          console.warn(`Middleware blocked access to: ${pathname}`);
+      if (middleware) {
+        const result = middleware();
+        const isAllowed = result instanceof Promise ? await result : result;
+    
+        if (!isAllowed) {
           return;
+        }
       }
+     
+      
 
       if (this._currentRoute && this._currentRoute !== route) {
           this._currentRoute.leave();
       }
 
       this._currentRoute = route || null;
-
-      route.render();
-      
+      if(route) {
+        route.render();
+      } 
       
   }
 
-  go(pathname: string) {
-    if (this._currentRoute && this._currentRoute.match(pathname)) {
-      return;
-    }
-    
+  go(pathname: string) {  
     if (this.history) {
       this.history.pushState({}, '', pathname);
     }

@@ -54,7 +54,6 @@ class HTTPTransport {
 
   request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
     const { method, headers = {}, data } = options;
-    console.log('HTTP request data', data)
     return new Promise((resolve, reject) => {
       if (!method) {
         reject(new Error('No method provided'));
@@ -63,9 +62,8 @@ class HTTPTransport {
 
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
-      if (isGet && !!data) { console.log('query', queryStringify(data as Record<string, any>)) } else {
-        console.log('data is ', !!data )
-      }
+      if (isGet && !!data) { console.log('query', queryStringify(data as Record<string, any>)) }
+       
       xhr.open(
         method,
         isGet && !!data ? `${url}${queryStringify(data as Record<string, any>)}` : url
