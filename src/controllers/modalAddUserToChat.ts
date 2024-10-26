@@ -1,9 +1,7 @@
 import ChatApi from '../api/chatApi';
 import UserApi from '../api/userApi';
 import store from '../store/store';
-import Router from '../routing/Router'
 
-const router = new Router('#app');
 const chatApi = new ChatApi();
 const userApi = new UserApi();
 

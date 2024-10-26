@@ -1,5 +1,4 @@
 import AuthApi from '../api/authApi';
-import store from '../store/store';
 import Router from '../routing/Router'
 
 const router = new Router('#app');
@@ -26,19 +25,18 @@ export default class UserLoginController implements FormController {
   }
 
   public async logout() {
-    // try {
-    //   const logoutResponse = await userApi.logout();
-    //   if (logoutResponse.response === 'OK') {
-    //     router.go('/login');
-    //   }
-    //   else {
-    //     console.log('Пользователь уже покинул')
-    //   }
-    // } catch (error) {
-      
-    // }
-    const loginResponse = await authApi.logout()
-    console.log(loginResponse.response)
+    try {
+      const logoutResponse = await authApi.logout();
+      if (logoutResponse.response === 'OK') {
+        router.go('/login');
+      }
+      else {
+        console.log('Пользователь уже покинул')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+   
   }
 
   public onSubmit(data: Indexed) {

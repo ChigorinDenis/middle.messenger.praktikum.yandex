@@ -1,21 +1,16 @@
 import Block from '../../framework/Block';
 import ChatItem from '../../components/ChatItem/ChatItem';
-// import data from '../../mockData/chatsData'
-//import chats from '../../mockData/chatsData';
-import ChatsController from '../../controllers/chatsController';
 import messagesController from '../../controllers/messagesController';
-import { isEqual } from '../../utils/utils';
 import connect from '../../store/connect';
 import store from '../../store/store';
 
-// const ChatItemsList = data.map((props) => new ChatItem(props))
-// const chatsController = new ChatsController();
+
 type ChatListSettings = {
   chats: ChatItemSettings[]
 }
-interface BlockProps {
-  [key: string]: any;
-}
+// interface BlockProps {
+//   [key: string]: any;
+// }
 
 class ChatsList extends Block {
   constructor(props: ChatListSettings) {
@@ -43,7 +38,7 @@ function mapUserToProps(state:Indexed) {
 const createItemCallback =  (prop:ChatItemSettings) => {
   return new ChatItem(
     {...prop, 
-      onClick: (e:Event) => {
+      onClick: () => {
         store.set('ui.currentChatId', prop.id);
         messagesController.start();
       }

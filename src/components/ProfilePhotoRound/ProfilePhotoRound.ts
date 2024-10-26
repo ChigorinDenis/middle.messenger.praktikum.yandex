@@ -10,13 +10,13 @@ class ProfilePhotoRound extends Block {
     super({
       ...props,
       events: { // Добавляем обработчик события изменения файла
-        click: (event: Event) => this.triggerFileInput(event), 
+        click: () => this.triggerFileInput(), 
         change: (event: Event) => this.handleFileChange(event)  // Триггер для кнопки "загрузить фото"
       },
     });
   }
 
-  protected triggerFileInput = (event: Event): void  =>{
+  protected triggerFileInput = (): void  =>{
     console.log('trigger')
     const fileInput = this.element?.querySelector('input[type="file"]');
     if (fileInput) {

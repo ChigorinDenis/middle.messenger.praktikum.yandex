@@ -22,14 +22,14 @@ class MessageBox extends Block {
       ButtonAdd: new Button({
         title: 'Добавить участника',
         btnStyle:'btn-2-small',
-        onClick: (e:Event) => {
+        onClick: () => {
           store.set('ui.modalActive.name', 'addUserToChat');
         }
       }),
       ButtonDelete: new Button({
         title: 'Удалить чат',
         btnStyle:'btn-2-small',
-        onClick: (e:Event) => {
+        onClick: () => {
           store.set('ui.modalActive.name', 'deleteChat');
         }
       }),

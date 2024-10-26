@@ -27,10 +27,6 @@ export default class AuthApi extends BaseAPI {
   }
 
   public login(data: Indexed): Promise<XMLHttpRequest> {
-    const auth = {
-      "login": "chadaRodis",
-      "password": "rodisChada",
-    }
     return this.apiInstance.post(`${this.apiURL}/signin`, { data });  
   }
 

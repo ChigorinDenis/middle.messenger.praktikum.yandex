@@ -112,7 +112,7 @@ export default class Block {
 
    
   protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
-    // console.log(oldProps, newProps);
+    console.log(oldProps, newProps);
     return true;
     
   }
