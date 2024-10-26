@@ -72,7 +72,7 @@ function mapUserToProps(state: State):Indexed {
   };
 }
 
-const createItemCallback =  (prop:Message) => {
+const createItemCallback =  (prop:Indexed) => {
   return new MessageBlock(prop)
 }
 const listUpdateProps = {
@@ -80,19 +80,8 @@ const listUpdateProps = {
   createItemCallback,
 }
 
-function mapStateToListProps(state: State) {
-  // const { currentChatId } = state.ui;
-  // const { messages } = state;
-  
-  // if (currentChatId != null && messages[currentChatId]) {
-  //   // Возвращаем сообщения для текущего чата, отфильтрованные по currentChatId
-  //   return {
-  //     messages: messages[currentChatId],
-  //   };
-  // }
-
-  // Если текущий чат не найден или нет сообщений для него, возвращаем пустой массив
-  return  state.messages;
+function mapStateToListProps(state: Indexed):Indexed {
+  return  state.messages as Indexed;
 }
 
 export default connect(MessageBox, mapUserToProps, listUpdateProps, mapStateToListProps);

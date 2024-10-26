@@ -25,7 +25,7 @@ export default class MessageInput extends Block {
         type:'text',
         placeholder:'Сообщение',
         inputClass: 'input-field bgd-light',
-        onEnter: onEnter(props.controller), 
+        onEnter: onEnter(props.controller as  MessageControllerInterface), 
       })
     });
   }

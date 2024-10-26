@@ -1,7 +1,7 @@
 import Block from "../../framework/Block";
 
 export default class MessageBlock extends Block {
-  constructor(props: Message) {
+  constructor(props: Indexed) {
     super({
       ...props,
     });

@@ -85,7 +85,7 @@ interface Modal {
 }
 
 interface MessageControllerInterface {
-  send: (message: Message) => void
+  send: (message: string) => void
 }
 
 interface Message {
@@ -103,7 +103,7 @@ type State = {
     user: Indexed | null
   },
   chats: Indexed[],
-  messages: Message[] | Indexed[],
+  messages: Indexed[],
   ui: {
     currentChatId: number | null,
     modalActive: {
