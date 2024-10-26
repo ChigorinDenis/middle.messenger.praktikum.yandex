@@ -20,11 +20,11 @@ import AuthApi from "./api/authApi";
 
 export default class App {
 
-  private appElement: HTMLElement | null;
+  // private appElement: HTMLElement | null;
   private nav: HTMLElement | null;
 
   constructor() {
-    this.appElement = document.getElementById('app');
+    // this.appElement = document.getElementById('app');
     this.nav = document.getElementById('temp');
     store.on(StoreEvents.Updated, () => {});
   }

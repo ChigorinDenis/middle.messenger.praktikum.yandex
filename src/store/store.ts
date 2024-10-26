@@ -12,7 +12,7 @@ const initState: State = {
     user: null
   },
   chats: [],
-  messages: {},
+  messages: [],
   ui: {
     currentChatId: null,
     modalActive: {
