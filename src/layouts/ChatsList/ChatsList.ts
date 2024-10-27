@@ -1,9 +1,11 @@
 import Block from '../../framework/Block';
 import ChatItem from '../../components/ChatItem/ChatItem';
+import ChatsController from '../../controllers/chatsController';
 import messagesController from '../../controllers/messagesController';
 import connect from '../../store/connect';
 import store from '../../store/store';
 
+const chatsController = new ChatsController();
 
 type ChatListSettings = {
   chats: ChatItemSettings[]
@@ -40,7 +42,10 @@ const createItemCallback =  (prop:ChatItemSettings) => {
     {...prop, 
       onClick: () => {
         store.set('ui.currentChatId', prop.id);
+        store.set('currentChat', { id: prop.id, title: prop.title });
+        chatsController.getChatUsers(prop.id)
         messagesController.start();
+        console.log('store', store.getState())
       }
     })
 }

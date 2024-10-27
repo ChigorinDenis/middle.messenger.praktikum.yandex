@@ -14,7 +14,7 @@ export default class UserSignupController implements FormController {
         const userResponse = await authApi.getUser();
         store.set('auth.user', userResponse.response);
         console.log(store.getState('auth.user'));
-        router.go('/');
+        router.go('/messenger');
       }
     } catch (error) {
       console.log(error);

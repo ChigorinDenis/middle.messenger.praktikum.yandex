@@ -2,7 +2,9 @@ import Block from "../../framework/Block";
 import MessageBlock from '../../components/Message/Message';
 import MessageInput from "../../components/MessageInput/MessageInput";
 import Button from '../../components/Button/Button';
+import UsersDropdown from "../../components/UsersDropdown/UsersDropdown";
 // import data from '../../mockData/messagesData';
+import User from "../../components/User/User";
 import connect from '../../store/connect';
 import store from '../../store/store';
 import messagesController from "../../controllers/messagesController";
@@ -10,7 +12,16 @@ import messagesController from "../../controllers/messagesController";
 
 // const Messages =  data.map((props) => new Message(props))
 
+const mapStateToProps = (state:State) => {
+  const currentChat = state.currentChat;
+    return {
+      name: currentChat.title,
+      currentChatId: state.ui.currentChatId
+    }
+  
+}
 
+const ChatProfile = connect(User, mapStateToProps);
 
 class MessageBox extends Block {
   constructor(props: Indexed) {
@@ -33,32 +44,33 @@ class MessageBox extends Block {
           store.set('ui.modalActive.name', 'deleteChat');
         }
       }),
+      ChatProfile: new ChatProfile({
+        isProfile: false,
+      }),
+      UsersDropdown: new UsersDropdown({}),
       ...props,
     });
   
-    console.log(this)
   }
   public render(): string {
     return `
             <section class="message-list bgd-dark">
-              <header class="message-header">
-                <div class="user">
-                  <div class="chat-avatar">
-                    <div class="chat-avatar-img"></div>
-                  </div>
-                  <div class="user-info">
-                    <span class="user-title">Вадим</span>
-                  </div>
+              {{#if currentChatId}}
+                <header class="message-header">
+                  {{{ChatProfile}}}
+                  {{{UsersDropdown}}}
+                  <span class="close-chat">
+                    {{{ButtonAdd}}}
+                    {{{ButtonDelete}}}
+                    <img src="/icons/points.svg" alt="points" />
+                  </span>
+                </header>
+                <div class="message-box">
+                  {{{Messages}}}
                 </div>
-                <span class="close-chat">
-                  {{{ButtonAdd}}}
-                  {{{ButtonDelete}}}
-                  <img src="/icons/points.svg" alt="points" />
-                </span>
-              </header>
-            <div class="message-box">
-                {{{Messages}}}
-              </div>
+              {{else}}
+                <div class="chat-noselected">Выберите чат или добавьте новый</div>
+              {{/if}}
               {{{MessageInput}}}
               </section>
            `;

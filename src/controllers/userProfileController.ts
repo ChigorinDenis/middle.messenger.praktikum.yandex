@@ -9,7 +9,7 @@ export default class UserProfileController implements FormController {
 
   public async updateUser(data: Indexed) {
     try {
-      const updateUserResponse = await userApi.updateUser({...data, display_name: 'default'});
+      const updateUserResponse = await userApi.updateUser({...data });
       console.log(updateUserResponse.response)
     } catch (error) {
       console.log(error);

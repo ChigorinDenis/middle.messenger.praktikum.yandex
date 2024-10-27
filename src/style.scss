@@ -214,6 +214,12 @@ ul {
   width:100%; 
 }
 
+.chat-noselected {
+  left: 70%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, 0);
+}
 
 .message {
   align-items: flex-start;
@@ -505,7 +511,7 @@ ul {
   }
 }
 
-.modal-container {;
+.modal-container {
   background-color: $background-dark;
   display:  flex;
   flex-direction: column;
@@ -522,4 +528,50 @@ ul {
   h3 {
     text-align: center;
   }
+}
+
+.users-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.users-dropdown-trigger {
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.users-dropdown-list {
+  background-color: $background-light;
+  border-radius: 4px;
+  color: $primary-color;
+  display: none;
+  left: 0;
+  list-style: none;
+  padding: 10px 0;
+  position: absolute;
+  top: 100%;
+  width: 200px;
+  z-index: 10;
+ }
+
+.users-dropdown:hover .users-dropdown-list {
+  display: block;
+}
+
+.users-dropdown-item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+
+  &:hover {
+    background-color: $background-dark;
+  }
+}
+
+.users-dropdown-item span {
+  font-size: 14px;
 }

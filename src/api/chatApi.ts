@@ -25,9 +25,15 @@ export default class ChatApi extends BaseAPI {
   public  deleteUser(data: Indexed): Promise<XMLHttpRequest> {
     return this.apiInstance.delete(`${this.apiURL}/users`, { data })
   }
+
   public  getChatToken(chatId:number): Promise<XMLHttpRequest> {
     return this.apiInstance.post(`${this.apiURL}/token/${chatId}`)
   }
+
+  public  getChatUsers(chatId:number): Promise<XMLHttpRequest> {
+    return this.apiInstance.get(`${this.apiURL}/${chatId}/users`)
+  }
+
   public request(): Promise<XMLHttpRequest> {
     return this.apiInstance.get(`${this.apiURL}/`);
   }

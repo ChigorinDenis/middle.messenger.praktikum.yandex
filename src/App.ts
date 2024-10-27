@@ -36,7 +36,28 @@ export default class App {
       this.nav.innerHTML = links.render();
     }
     
-    const requireAuth = async () => {
+    const requireLogin = (goTo: string ) => async () => {
+      const userStore = store.getState('auth.user');
+      if (!userStore) {
+        try {
+          const authApi = new AuthApi();
+          const userResponse = await authApi.getUser();
+          if (userResponse.status === 200) {
+            console.log('store', store.getState())
+            store.set('auth.user', JSON.parse(userResponse.response));
+            router.go(goTo);
+            return false;
+          }
+        } catch (error) {
+          console.log('Ошибка авторизации', error)
+        }
+        return true;
+      }
+      router.go(goTo);
+      return false;
+    };
+
+    const requireAuth = (goTo: string ) => async () => {
       const userStore = store.getState('auth.user');
       if (!userStore) {
         try {
@@ -50,17 +71,18 @@ export default class App {
         } catch (error) {
           console.log('Ошибка авторизации', error)
         }
-        router.go('/login');
+        router.go(goTo);
         return false;
       }
 
       return true;
     };
+   
 
     const router = new Router('#app');
     router
-    .use('/', ChatPage, requireAuth)
-    .use('/login', LoginPage,)
+    .use('/', LoginPage, requireLogin('/messenger'))
+    .use('/messenger', ChatPage, requireAuth('/'))
     .use('/sign-up', SignupPage)
     .use('/settings', ProfilePage)
     .use('/edit-password', EditPasswordPage)

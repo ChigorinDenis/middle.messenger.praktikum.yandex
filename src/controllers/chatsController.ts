@@ -17,4 +17,16 @@ export default class ChatsController {
     }
   }
 
+  public async getChatUsers(chatId: number) {
+    try {
+      const chatResponse = await chatApi.getChatUsers(chatId);
+      if (chatResponse.status === 200){
+        store.set('chatUsers', JSON.parse(chatResponse.response)) 
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 } 

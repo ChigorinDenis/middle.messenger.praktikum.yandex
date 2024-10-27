@@ -103,4 +103,10 @@ export default class Router {
   getRoute(pathname:string) {
       return this.routes.find(({route}) => route.match(pathname));
   }
+  
+  getCurrentPath() {
+    if (this._currentRoute !== null) {
+      return this._currentRoute.getPathname();
+    }
+  }
 }

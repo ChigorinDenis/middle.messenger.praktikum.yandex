@@ -5,6 +5,7 @@ import ModalAdd from '../layouts/Modal/Modal';
 import modalAddUserToChat from '../controllers/modalAddUserToChat';
 import modalCreateChatController from '../controllers/modalCreateChatController';
 import modalDeleteChatController from '../controllers/modalDeleteChatController';
+import modalDeleteUserFromChatController from '../controllers/modalDeleteUserFromChatController';
 // import socket from '../controllers/messagesController'
 
 
@@ -25,6 +26,13 @@ export default class PageChat extends Block {
         btnName: 'Удалить',
         modalName: 'deleteChat',
         controller: modalDeleteChatController,
+        inputHidden: true,
+      }),
+      ModalDeleteUserFromChat: new ModalAdd({
+        title: 'Удалить пользователя?',
+        btnName: 'Удалить',
+        modalName: 'deleteUserFromChat',
+        controller: modalDeleteUserFromChatController,
         inputHidden: true,
       }),
       ModalCreateChat: new ModalAdd({
@@ -49,6 +57,7 @@ export default class PageChat extends Block {
       {{{ModalAddUser}}}
       {{{ModalDeleteChat}}}
       {{{ModalCreateChat}}}
+      {{{ModalDeleteUserFromChat}}}
     </div>
     `;
   }

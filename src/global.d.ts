@@ -15,6 +15,7 @@ type InputSettings = {
   onBlur?: (e:Event) => void;
   onChange?: (e:Event) => void;
   onEnter?: (e:Event) => void;
+  onInput?: (e:Event) => void;
   inputClass?: string,
 }
 
@@ -98,12 +99,29 @@ interface Message {
     isSender?: boolean
 }
 
-type State = {
+interface User {
+  display_name?: string;
+  email?: string;
+  login?: string;
+  first_name?: string;
+  second_name?: string;
+  phone?: string;
+  avatar?: string;
+}
+
+// interface State extends Indexed {
+//   auth?: {
+//     user?: User;
+//   };
+// }
+interface State  extends Indexed {
   auth: {
-    user: Indexed | null
+    user: User | null
   },
   chats: Indexed[],
+  chatUsers: Indexed[],
   messages: Indexed[],
+  currentChat: Indexed,
   ui: {
     currentChatId: number | null,
     modalActive: {

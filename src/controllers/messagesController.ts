@@ -19,7 +19,10 @@ class MessageController implements MessageControllerInterface {
     this.socket = new WebSocketTransport(url);
 
     this.socket.on('open', () => {
-      console.log('Соединение открыто');
+      this.socket.send(JSON.stringify({
+        content: "0",
+        type: "get old"
+      }));
     });
     
     this.socket.on('close', () => {
@@ -40,12 +43,7 @@ class MessageController implements MessageControllerInterface {
     
     this.socket.connect();
 
-    setTimeout(() => {
-      this.socket.send(JSON.stringify({
-        content: "0",
-        type: "get old"
-      }));
-        }, 1000)
+ 
     }
   }
 

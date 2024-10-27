@@ -59,4 +59,8 @@ export default class Route {
 
     this._block.show();
   }
+
+  getPathname() {
+    return this._pathname;
+  }
 }

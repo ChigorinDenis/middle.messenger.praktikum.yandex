@@ -14,7 +14,7 @@ export default class UserLoginController implements FormController {
         // const userResponse = await userApi.getUser();
         // store.set('auth.user', userResponse.response);
         // console.log(store.getState('auth.user'));
-        router.go('/');
+        router.go('/messenger');
       }
       else {
         console.log('login failed', loginResponse)
@@ -28,7 +28,7 @@ export default class UserLoginController implements FormController {
     try {
       const logoutResponse = await authApi.logout();
       if (logoutResponse.response === 'OK') {
-        router.go('/login');
+        router.go('/');
       }
       else {
         console.log('Пользователь уже покинул')
