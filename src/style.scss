@@ -158,6 +158,14 @@ ul {
   width: 100%;
 }
 
+.btn-2-small {
+  border: 2px solid $secondary-color;
+  border-radius: 12px;
+  font-size: 10px;
+  padding: 8px;
+  text-align: center;
+}
+
 .btn-round { 
   background-color:  $accent-color2;
   background-image: url('/icons/next.svg');
@@ -206,6 +214,12 @@ ul {
   width:100%; 
 }
 
+.chat-noselected {
+  left: 70%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, 0);
+}
 
 .message {
   align-items: flex-start;
@@ -225,7 +239,9 @@ ul {
   &-box {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     justify-content: space-between;
+    overflow-y: auto;
   }
 
   &-header {
@@ -294,6 +310,10 @@ ul {
   position: relative;
 
     &:hover {
+      background: #232836;
+    }
+
+    &.chat-current {
       background: #232836;
     }
 }
@@ -376,6 +396,9 @@ ul {
   }
 
   &-search {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin-bottom: 23px;
   }
 }
@@ -474,4 +497,81 @@ ul {
 
 .nav-links {
   color: white;
+}
+
+.modal-area {
+  background: rgb(0 0 0 / 40%);
+  display: none;
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+
+  &.modal-open {
+    display: block;
+  }
+}
+
+.modal-container {
+  background-color: $background-dark;
+  display:  flex;
+  flex-direction: column;
+  gap: 20px;
+  height: auto;
+  justify-content: center;
+  left: 50%;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+
+  h3 {
+    text-align: center;
+  }
+}
+
+.users-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.users-dropdown-trigger {
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.users-dropdown-list {
+  background-color: $background-light;
+  border-radius: 4px;
+  color: $primary-color;
+  display: none;
+  left: 0;
+  list-style: none;
+  padding: 10px 0;
+  position: absolute;
+  top: 100%;
+  width: 200px;
+  z-index: 10;
+ }
+
+.users-dropdown:hover .users-dropdown-list {
+  display: block;
+}
+
+.users-dropdown-item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+
+  &:hover {
+    background-color: $background-dark;
+  }
+}
+
+.users-dropdown-item span {
+  font-size: 14px;
 }

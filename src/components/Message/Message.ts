@@ -1,19 +1,19 @@
 import Block from "../../framework/Block";
 
-export default class Message extends Block {
-  constructor(props: MessageSettings) {
+export default class MessageBlock extends Block {
+  constructor(props: Indexed) {
     super({
       ...props,
     });
   }
 
   public render(): string {
-    const messageClass = this.props.type === 'sender' ? 'message-user' : 'message-other';
+    const messageClass = this.props.isSender ? 'message-user' : 'message-other';
     return `<div class="message ${messageClass}">
               <p>
-                {{text}}
+                {{content}}
               </p>
-              <span class="message-time">11:22</span>
+              <span class="message-time">{{time}}</span>
            </div>`;
   }
 }

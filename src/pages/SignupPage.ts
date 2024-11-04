@@ -2,7 +2,7 @@ import Form from '../layouts/Form/Form';
 import Block from '../framework/Block';
 import getValidationFunc from '../validation/validation';
 import validationRules from '../validation/validationRules';
-
+import UserSignupController from '../controllers/userSignupController';
 
 const inputGroupList: InputGroupSettings[] = [
   {
@@ -78,6 +78,7 @@ const inputGroupList: InputGroupSettings[] = [
 ];
 
 const validate = getValidationFunc(validationRules);
+const userSignupController = new UserSignupController();
 
 export default class SignupPage extends Block{
   constructor() {
@@ -89,6 +90,7 @@ export default class SignupPage extends Block{
         inputGroupList,
         validate,
         bgdForm: 'bgd-dark',
+        controller: userSignupController,
       })
     })
   }

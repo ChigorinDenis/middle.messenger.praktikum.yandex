@@ -1,14 +1,18 @@
 import Block from "../../framework/Block";
 
 export default class ProfilePhoto extends Block {
-  constructor() {
-    super();
+  constructor(props:Indexed) {
+    super({
+      ...props,
+    });
   }
+
+  
 
   public render(): string {
     return `<div class="profile-photo">
-              <img src="ava.png" alt="ava">
-              <span class="profile-name">Иван Иванов</span>
+              <img src="{{img_src}}" alt="ava">
+              <span class="profile-name">{{display_name}}</span>
             </div>`;
   }
 }

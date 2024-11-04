@@ -3,7 +3,9 @@ import ProfilePhotoRound from '../../components/ProfilePhotoRound/ProfilePhotoRo
 import Form from '../../layouts/Form/Form';
 import getValidationFunc from '../../validation/validation';
 import validationRules from '../../validation/validationRules';
+import UserPasswordController from '../../controllers/userPasswordController';
 
+const userPasswordController = new UserPasswordController();
 const validate = getValidationFunc(validationRules);
 
 const inputGroupList: InputGroupSettings[] = [
@@ -43,7 +45,7 @@ const inputGroupList: InputGroupSettings[] = [
 export default class EditPassword extends Block {
   constructor() {
     super({
-      ProfilePhotoRound: new ProfilePhotoRound(),
+      ProfilePhotoRound: new ProfilePhotoRound({}),
       Form: new Form({
         title: '',
         btnSubmitTitle: 'Сохранить',
@@ -51,6 +53,7 @@ export default class EditPassword extends Block {
         validate,
         bgdForm: 'bgd-light',
         btnStyle: 'btn-2',
+        controller: userPasswordController
       })
     });
    

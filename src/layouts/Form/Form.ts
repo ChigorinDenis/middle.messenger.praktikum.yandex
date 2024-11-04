@@ -2,6 +2,8 @@ import Block from "../../framework/Block";
 import InputGroup from '../../components/InputGroup/InputGroup';
 import Button from '../../components/Button/Button';
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
+import connect from '../../store/connect'
+import store from '../../store/store';
 
 type FormSettings = {
   title: string,
@@ -11,17 +13,22 @@ type FormSettings = {
   validate: (name:string, value: string | number) => string | null;
   bgdForm?: string,
   btnStyle?: string,
+  controller?: FormController
 }
 
-
-export default class Form extends Block {
+ class Form extends Block {
   
   constructor(props: FormSettings) {
 
     const onChange = (e: Event): void => {
       const target = e.target as HTMLInputElement;
       const { name, value } = target;
-      console.log(name, value);
+      store.set(name, value);
+      // const index = props.inputGroupList.findIndex((prop) => prop.name === name);
+      // if (index != -1) {
+      //   this.lists.inputGroupList[index].setProps({ value });
+      // }
+      console.log('value', value);
     }
     
     const onBlur = (e: Event): void => {
@@ -38,7 +45,7 @@ export default class Form extends Block {
       e.preventDefault();
       const form = this.getContent() as HTMLFormElement;
         const formData = new FormData(form);
-    
+        
         let isFormDataValid = true;
         props.inputGroupList.forEach(({ name }) => {
           const value = formData.get(name) as string || '';
@@ -56,6 +63,7 @@ export default class Form extends Block {
           return;
         }
         console.log('formData', Object.fromEntries(formData));
+        props.controller?.onSubmit(Object.fromEntries(formData));
       }
 
 
@@ -101,3 +109,5 @@ export default class Form extends Block {
     `;
   }
 }
+
+export default connect(Form, (state) => state)
