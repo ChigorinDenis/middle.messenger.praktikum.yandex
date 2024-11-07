@@ -2,8 +2,7 @@ import HTTPTransport from './http';
 import { expect, use } from 'chai';
 import sinonChai from 'sinon-chai'
 import {SinonStub, createSandbox} from 'sinon';
-
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 describe('HTTPTransport', () => {
   use(sinonChai)
   const sandbox = createSandbox();
