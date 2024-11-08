@@ -1,11 +1,12 @@
 import Form from '../layouts/Form/Form';
+import Router from '../routing/Router';
 import Block from '../framework/Block';
 import getValidationFunc from '../validation/validation';
 import validationRules from '../validation/validationRules';
 import UserLoginController from '../controllers/userLoginController';
 
 const userLoginController = new UserLoginController();
-     
+const router = new Router('#app');   
 const inputGroupList: InputGroupSettings[] = [
   {
     title: 'Логин',
@@ -41,6 +42,9 @@ export default class LoginPage  extends Block{
         inputGroupList,
         validate,
         bgdForm: 'bgd-dark',
+        btnLinkClick: () => {
+          router.go('/sign-up')
+        },
         controller: userLoginController
       })
     });

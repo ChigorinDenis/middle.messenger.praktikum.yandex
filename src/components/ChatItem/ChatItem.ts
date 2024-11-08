@@ -24,7 +24,7 @@ class ChatItem extends Block {
                 <div class="chat-header">
                   <div>
                     <span class="chat-name">{{title}}</span>
-                    <div class="chat-last-message">sdsd</div>
+                    <div class="chat-last-message"></div>
                   </div>
                   <span class="chat-time">22:22</span>
                 </div>
