@@ -87,18 +87,7 @@ export default class Block {
     if (!response) {
       return;
     }
-    this._render();
-
-    // Object.values(this.lists).forEach((list) => {
-    //   list.forEach((item) => {
-    //     console.log('item',item) 
-    //     if (item instanceof Block) {
-    //       item.render()
-    //       console.log('item getcont',item.getContent());
-    //     }
-    //   }) 
-    // })
-    
+    this._render(); 
   }
 
   public updateList(key: string, listProps: any[], createItemCallback: (item: any) => Block): void {
@@ -114,7 +103,6 @@ export default class Block {
   protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
     console.log(oldProps, newProps);
     return true;
-    
   }
 
   public dispatchComponentDidUpdate(): void {
@@ -137,7 +125,6 @@ export default class Block {
       } else if (Array.isArray(value)) {
         lists[key] = value;
       } else {
-         
         props[key] = value;
       }
     });
@@ -260,5 +247,9 @@ export default class Block {
     if (content) {
       content.style.display = 'none';
     }
+  }
+
+  public getProps(): Record<string, any> {
+    return this.props;
   }
 }

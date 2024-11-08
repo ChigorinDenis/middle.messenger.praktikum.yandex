@@ -31,6 +31,8 @@ class ModalAddUserToChatController implements FormController {
       const chatId = store.getState('ui.currentChatId');
       const chatUpdate = await chatApi.addUser({users: [userId], chatId})
       if (chatUpdate.status === 200) {
+        const chatUsers = store.getState('chatUsers') as Indexed[];
+        store.set('chatUsers',[...chatUsers, { id: userId, login: value}])
         console.log('User added to chat')
       }
     } catch (error) {
