@@ -13,7 +13,8 @@ function isEqual(lhs: string, rhs: string): boolean{
 
 function render(query: string, block: Block) {
   const root = document.querySelector(query);
-  root?.replaceChildren(block.getContent());
+  const content = block.getContent();
+  root?.replaceChildren(content);
   return root;
 }
 
@@ -41,9 +42,9 @@ export default class Route {
   }
 
   leave() {
-    if (this._block) {
-      this._block.hide();
-    }
+    // if (this._block) {
+    //   this._block.hide();
+    // }
   }
 
   match(pathname: string) {
@@ -56,8 +57,8 @@ export default class Route {
       render(this._props.rootQuery, this._block);
       return;
     }
-
-    this._block.show();
+    render(this._props.rootQuery, this._block);
+    // this._block.show();
   }
 
   getPathname() {

@@ -13,6 +13,7 @@ type FormSettings = {
   validate: (name:string, value: string | number) => string | null;
   bgdForm?: string,
   btnStyle?: string,
+  btnLinkClick?: () => void,
   controller?: FormController
 }
 
@@ -24,11 +25,6 @@ type FormSettings = {
       const target = e.target as HTMLInputElement;
       const { name, value } = target;
       store.set(name, value);
-      // const index = props.inputGroupList.findIndex((prop) => prop.name === name);
-      // if (index != -1) {
-      //   this.lists.inputGroupList[index].setProps({ value });
-      // }
-      console.log('value', value);
     }
     
     const onBlur = (e: Event): void => {
@@ -85,6 +81,7 @@ type FormSettings = {
       }),
       ButtonLink: new ButtonLink({
         title: props.btnLinkTitle || '',
+        onClick: props.btnLinkClick
       }),
       attr: {
         'class': props.bgdForm,

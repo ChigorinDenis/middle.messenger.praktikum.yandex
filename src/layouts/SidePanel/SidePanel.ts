@@ -11,7 +11,7 @@ import connect from '../../store/connect';
 const router = new Router('#app');
 const mapStateToProps = (state:State) => {
   return {
-    name: state.auth.user?.display_name,
+    name: `${state.auth.user?.first_name} ${state.auth.user?.second_name}`,
     avatar: state.auth.user?.avatar
   }
 }
@@ -36,7 +36,6 @@ export default class SidePanel extends Block {
         img_src: '/icons/settings.svg',
         alt: 'settings',
         onClick: () => {
-          console.log('onclick icon')
           router.go('/settings')
         }
       }),
