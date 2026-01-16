@@ -6,14 +6,13 @@ const router = new Router('#app');
 const authApi = new AuthApi();
 
 export default class UserSignupController implements FormController {
-  public async signup() {
+  public async signup(data:Indexed) {
     try {
-      const signupResponse = await authApi.create();
-      if(signupResponse.response === 'OK') {
+      const signupResponse = await authApi.createUser(data);
+      console.log('signUpRespose', signupResponse.response)
+      if(signupResponse.status === 200) {
+        store.reset();
         console.log('Signup successful');
-        const userResponse = await authApi.getUser();
-        store.set('auth.user', userResponse.response);
-        console.log(store.getState('auth.user'));
         router.go('/messenger');
       }
     } catch (error) {
@@ -22,7 +21,7 @@ export default class UserSignupController implements FormController {
     
   }
 
-  public onSubmit() {
-    this.signup();
+  public onSubmit(data:Indexed) {
+    this.signup(data);
   }
 } 

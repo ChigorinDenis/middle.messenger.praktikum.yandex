@@ -1,5 +1,6 @@
 import Form from '../layouts/Form/Form';
 import Block from '../framework/Block';
+import Router from '../routing/Router';
 import getValidationFunc from '../validation/validation';
 import validationRules from '../validation/validationRules';
 import UserSignupController from '../controllers/userSignupController';
@@ -78,6 +79,7 @@ const inputGroupList: InputGroupSettings[] = [
 ];
 
 const validate = getValidationFunc(validationRules);
+const router = new Router('#app'); 
 const userSignupController = new UserSignupController();
 
 export default class SignupPage extends Block{
@@ -90,6 +92,9 @@ export default class SignupPage extends Block{
         inputGroupList,
         validate,
         bgdForm: 'bgd-dark',
+        btnLinkClick: () => {
+          router.go('/')
+        },
         controller: userSignupController,
       })
     })

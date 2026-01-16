@@ -10,16 +10,16 @@ export default class AuthApi extends BaseAPI {
     this.apiInstance = new HTTP();
   }
 
-  public create(): Promise<XMLHttpRequest> {
-    const user = {
-      "first_name": "Chada",
-      "second_name": "Rodis",
-      "login": "chadaRodis",
-      "email": "chadarodis@tormance.com",
-      "password": "rodisChada",
-      "phone": "81119991111"
-    };
-    return this.apiInstance.post(`${this.apiURL}/signup`, { data: user,})
+  public createUser(data: Indexed): Promise<XMLHttpRequest> {
+    // const user = {
+    //   "first_name": "Chada",
+    //   "second_name": "Rodis",
+    //   "login": "chadaRodis",
+    //   "email": "chadarodis@tormance.com",
+    //   "password": "rodisChada",
+    //   "phone": "81119991111"
+    // };
+    return this.apiInstance.post(`${this.apiURL}/signup`, { data })
   }
   
   public updateUser(data: Indexed): Promise<XMLHttpRequest> {

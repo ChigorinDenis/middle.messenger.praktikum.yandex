@@ -7,6 +7,9 @@ export default class ButtonLink extends Block {
       attr: {
         'class': 'btn-link'
       },
+      events: {
+        click: props.onClick
+      }
     })
   }
 

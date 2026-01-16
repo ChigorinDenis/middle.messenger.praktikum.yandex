@@ -36,6 +36,9 @@ class Store extends EventBus {
   public getState(path: string = '') {
     return get(this.state, path);
   }
+  public reset() {
+    this.state = initState;
+  }
 
   public set(path: string, value: unknown) {
     set(this.state, path, value);

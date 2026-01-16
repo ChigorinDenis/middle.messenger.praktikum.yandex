@@ -82,8 +82,12 @@ export default class Router {
 
   go(pathname: string) {  
     if (this.history) {
-      this.history.pushState({}, '', pathname);
+      // this.history.pushState({}, '', pathname);
+      if (this._currentRoute?.getPathname() !== pathname) {
+        this.history.pushState({}, '', pathname);
     }
+    }
+    console.log('HISTORY', this.history);
     this._onRoute(pathname);
   }
 

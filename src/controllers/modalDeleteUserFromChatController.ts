@@ -12,7 +12,9 @@ class ModalDeleteUserFromChatController implements FormController {
       if (deleteUserResponse.status!= 200) {
         throw new Error('Error delete user');
       }
-      console.log('пользователь удален');
+      const chatUsers = store.getState('chatUsers') as Indexed[];
+      const filteredChatUsers = chatUsers.filter((user) => user.id != userId)
+      store.set('chatUsers', filteredChatUsers)
     } catch (error) {
       console.log(error);
     }

@@ -32,7 +32,7 @@ class ProfileInfo extends Block {
         img_src: '/icons/arrow_back.svg',
         alt: 'back',
         onClick: () => {
-          router.go('/')
+          router.go('/messenger')
         }
       }),
       IconLogout: new IconButton({

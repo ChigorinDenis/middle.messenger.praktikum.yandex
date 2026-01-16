@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const METHODS = {
+export const METHODS = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
@@ -52,7 +52,7 @@ class HTTPTransport {
     return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   };
 
-  request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
+  request = (url: string, options: Options, timeout = 10000): Promise<XMLHttpRequest> => {
     const { method, headers = {}, data } = options;
     return new Promise((resolve, reject) => {
       if (!method) {

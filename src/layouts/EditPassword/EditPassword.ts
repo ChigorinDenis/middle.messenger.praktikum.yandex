@@ -1,10 +1,13 @@
 import Block from '../../framework/Block';
 import ProfilePhotoRound from '../../components/ProfilePhotoRound/ProfilePhotoRound';
+import IconButton from '../../components/IconButton/IconButton';
 import Form from '../../layouts/Form/Form';
 import getValidationFunc from '../../validation/validation';
 import validationRules from '../../validation/validationRules';
 import UserPasswordController from '../../controllers/userPasswordController';
+import Router from '../../routing/Router';
 
+const router = new Router('#app');
 const userPasswordController = new UserPasswordController();
 const validate = getValidationFunc(validationRules);
 
@@ -54,7 +57,14 @@ export default class EditPassword extends Block {
         bgdForm: 'bgd-light',
         btnStyle: 'btn-2',
         controller: userPasswordController
-      })
+      }),
+      IconBack: new IconButton({
+        img_src: '/icons/arrow_back.svg',
+        alt: 'back',
+        onClick: () => {
+          router.go('/settings')
+        }
+      }),
     });
    
   }
@@ -63,7 +73,7 @@ export default class EditPassword extends Block {
     return `
       <div class="side-panel">
         <div class="side-panel-header">
-          <img src="/icons/arrow_back.svg" alt="back">
+          {{{IconBack}}}
         </div>  
         {{{ProfilePhotoRound}}}
         {{{Form}}}
